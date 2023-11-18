@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_version/rest/ingredient.dart';
 import 'package:flutter_version/widgets/recipe_step.dart';
 import 'package:flutter_version/widgets/table_widget.dart';
+import 'package:flutter_version/widgets/table_nutrients.dart';
+
 import 'package:flutter_version/widgets/tag.dart';
 import '../rest/recipe.dart';
 import 'dart:collection';
@@ -34,7 +37,7 @@ class _RecipePageState extends State<RecipePage> {
               ),
               Icon(Icons.schedule),
               //Text(widget.recipe.time.toString() + " min", style: Theme.of(context).textTheme.headlineMedium),
-              Text(" 40 min", style: Theme.of(context).textTheme.headlineSmall)
+              Text(" ${widget.recipe.time} min", style: Theme.of(context).textTheme.headlineSmall)
             ],
           ),
         ),
@@ -48,7 +51,7 @@ class _RecipePageState extends State<RecipePage> {
                     left: MediaQuery.of(context).size.width * 1 / 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.asset("assets/food_template.jpg",
+                  child: Image.network("${widget.recipe.imagePath}",
                       fit: BoxFit.cover),
                 ),
               ),
@@ -60,18 +63,18 @@ class _RecipePageState extends State<RecipePage> {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).size.height * 1 / 20),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
                           right: MediaQuery.of(context).size.width * 1 / 12,
                           left: 0),
-                      child: Container(
+                      child: SingleChildScrollView(
                         child: DataTableExample(
                           title: "Ingredients",
-                          contents: LinkedHashMap<String, String>.from(
-                              {"Tomato": "Test"}),
-                          numItems: 1,
+                          contents: widget.recipe.ingredients,
+                          numItems: widget.recipe.ingredients.length,
                         ),
                       ),
                     ),
@@ -80,11 +83,11 @@ class _RecipePageState extends State<RecipePage> {
                           right: 0,
                           left: MediaQuery.of(context).size.width * 1 / 12),
                       child: Container(
-                        child: DataTableExample(
-                          title: "Nutrients",
-                          contents: LinkedHashMap<String, String>.from(
-                              {"Proteins": "Test"}),
-                          numItems: 1,
+                        child: DataTableExample2(
+                          title: "Nutrition",
+                          names: ["Calories", "Fat", "Carbs", "Protein"] + List<String>.from(widget.recipe.minerals.keys) + List<String>.from(widget.recipe.vitamins.keys),
+                          values: ['${widget.recipe.calories}', '${widget.recipe.fats}', '${widget.recipe.carbs}', '${widget.recipe.proteins}'] + List<String>.from(widget.recipe.minerals.values) + List<String>.from(widget.recipe.vitamins.values),
+                          numItems: widget.recipe.minerals.length + widget.recipe.vitamins.length + 4,
                         ),
                       ),
                     ),
@@ -112,7 +115,7 @@ class _RecipePageState extends State<RecipePage> {
     );
   }
   List<recipe_step> genList(){
-    return List<recipe_step>.generate(10, (int index) => recipe_step(number: index, content: 'content', color: Colors.green));
+    return List<recipe_step>.generate(widget.recipe.steps.length, (int index) => recipe_step(number: index + 1, content: widget.recipe.steps[index], color: Colors.green));
   }
 
   List<tag> genTagList(){

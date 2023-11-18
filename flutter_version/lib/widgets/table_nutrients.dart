@@ -5,17 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_version/rest/ingredient.dart';
 
 
-class DataTableExample extends StatefulWidget {
-  const DataTableExample({super.key, required this.title, required this.numItems, required this.contents});
+class DataTableExample2 extends StatefulWidget {
+  const DataTableExample2({super.key, required this.title, required this.numItems, required this.names, required this.values});
   final String title;
   final int numItems;
-  final List<Ingredient> contents;
+  final List<String> names;
+  final List<String> values;
 
   @override
-  State<DataTableExample> createState() => _DataTableExampleState();
+  State<DataTableExample2> createState() => _DataTableExampleState();
 }
 
-class _DataTableExampleState extends State<DataTableExample> {
+class _DataTableExampleState extends State<DataTableExample2> {
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class _DataTableExampleState extends State<DataTableExample> {
                   }
                   return null; // Use default value for other states and odd rows.
                 }),
-            cells: <DataCell>[DataCell(Text('${widget.contents[index].type}: ${widget.contents[index].quantity} ${widget.contents[index].unit}'))],
+            cells: <DataCell>[DataCell(Text('${widget.names[index]}: ${widget.values[index]}'))],
           ),
         ),
       ),
