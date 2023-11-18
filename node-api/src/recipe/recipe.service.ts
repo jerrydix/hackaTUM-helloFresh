@@ -1,143 +1,72 @@
-import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
-import { PrismaService } from "@/prisma.service";
-import { Duration, IngredientCategory } from "@prisma/client";
-import { Buffer } from "buffer";
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { PrismaService } from '@/prisma.service';
+import { IngredientCategory } from '@prisma/client';
+import { Prisma } from "#/index";
+
+import Decimal = Prisma.Decimal;
 
 @Injectable()
 export class RecipeService implements OnModuleInit {
   private readonly logger = new Logger(RecipeService.name);
   constructor(private prisma: PrismaService) {}
 
-  async getRecipeById(id: number): Promise<any> {
+  async getRecipeById(id: number) {
     return this.prisma.recipe.findUnique({
       where: { id },
+      include: { ingredients: true }
+    });
+  }
+
+  async getRecipeTotalPrice(id: number, made: boolean): Promise<Decimal | null> {
+    let cost = (await this.prisma.ingredient.aggregate({
+      where: { recipes: { some: { id } } },
+      _sum: { price: true }
+    }))._sum.price;
+
+    if (cost && made) cost = cost.mul(1.2);
+    return cost;
+  }
+
+  async getRecipes() {
+    return this.prisma.recipe.findMany({
       include: {
-        steps: {
-          include: {
-            ingredients: {
-              include: {
-                type: true,
-                instruction: true
-              }
-            },
-            action: true,
-            utensils: true
-          }
-        }
+        ingredients: true
       }
     });
   }
 
-  async getRecipeImageById(id: number): Promise<any> {
-    const recipe = await this.prisma.recipe.findUnique({
-      where: { id },
-      select: { imgUrl: true }
-    });
-    return recipe?.imgUrl;
-  }
+  truthValue(data: string) {
+    const cmp = data.toLowerCase();
+    return cmp === 'yes' || cmp === 'true' || parseInt(cmp) > 0;
 
-  async getRecipeInstructionById(id: number): Promise<any> {
-    return this.prisma.instructionStep.findMany({
-      where: { recipeId: id },
-      include: {
-        ingredients: {
-          include: {
-            type: true,
-            instruction: true
-          }
-        },
-        action: true,
-        utensils: true
-      }
-    });
-  }
-
-  transformInstructionToText(instruction: any): string {
-    let result = '';
-    for (const step of instruction) {
-      let text = step.action.template;
-      const ingredients = step.ingredients.map((i: any) => i.type.name).join(', ');
-      const { duration, durationUnit, additionalData } = step;
-      let durationData = '';
-      if (duration !== Duration.INSTANT) {
-        let unit = durationUnit.toLowerCase() + (duration > 1 ? 's' : '');
-        durationData = `for ${duration} ${unit}`;
-      }
-
-      text = text.replaceAll('[durationData]', durationData);
-      text = text.replaceAll('[ingredients]', ingredients);
-      for (const key in additionalData) {
-        text = text.replaceAll(`[${key}]`, additionalData[key]);
-      }
-      result += text + '\n';
-    }
-    return result;
   }
 
   async init() {
     await this.prisma.ingredient.deleteMany({ where: { id: { gt: -1 } } });
-    await this.prisma.instructionStep.deleteMany({ where: { id: { gt: -1 } } });
     await this.prisma.recipe.deleteMany({ where: { id: { gt: -1 } } });
     await this.prisma.ingredientType.deleteMany({ where: { name: { not: '' } } });
-    await this.prisma.action.deleteMany({ where: { name: { not: '' } } });
 
-    const fryAction = await this.prisma.action.upsert({
-      where: { name: 'FRY' },
-      update: {},
-      create: { name: 'FRY', template: 'Fry [ingredients] for [durationData].' },
-    });
+    const { default: ingredientMap } = await import('./resources/ingredients');
+    const ingredients: { [key: string]: any } = {};
+    for (const ingredientType in ingredientMap) {
+      const category = IngredientCategory[ingredientType as keyof typeof IngredientCategory];
 
-    const eggType = await this.prisma.ingredientType.upsert({
-      where: { name: 'egg' },
-      update: {},
-      create: {
-        name: 'egg',
-        category: IngredientCategory.DAIRY_AND_EGGS
-      },
-    });
-
-    const recipe = await this.prisma.recipe.create({
-      data: {
-        title: 'Fried Eggs',
-        imgUrl: 'url_to_image_of_fried_eggs.jpg',
-        description: 'Simple and classic fried eggs.',
-        unit: 'meal',
-        caloriesPerUnit: 92,
-        proteinsPerUnit: 6.27,
-        carbsPerUnit: 0.4,
-        fatsPerUnit: 7.04,
-        fiberPerUnit: 0,
-        vitamins: {
-          'A': '91'
-        },
-        minerals: {
-          'Calcium': '27',
-          'Iron': '0.91',
-          'Potassium': '68',
-        },
-        allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0])
+      for (const ingredient of ingredientMap[category]) {
+        ingredients[ingredient] = await this.prisma.ingredientType.create({
+          data: {
+            name: ingredient,
+            category,
+          },
+        });
+        this.logger.log(`Created '${ingredient}' ingredient type.`);
       }
-    });
+    }
 
-    const instructionStep = await this.prisma.instructionStep.create({
-      data: {
-        actionName: fryAction.name,
-        duration: 3,
-        durationUnit: Duration.MINUTE,
-        recipeId: recipe.id
-      }
-    });
-
-    await this.prisma.ingredient.create({
-      data: {
-        ingredientType: eggType.name,
-        quantity: 2, // 2 eggs
-        unit: 'piece',
-        instructionId: instructionStep.id
-      }
-    });
-
-    this.logger.log(`Created Fried Eggs recipe with id ${recipe.id}.`);
+    const { default: recipes } = await import('./resources/recipes');
+    for (const recipe of recipes) {
+      const result = await this.prisma.recipe.create({ data: recipe });
+      this.logger.log(`Created '${result.title}' recipe with id ${result.id}.`);
+    }
   }
 
   async onModuleInit() {

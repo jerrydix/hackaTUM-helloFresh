@@ -1,29 +1,27 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, Query } from "@nestjs/common";
 import { RecipeService } from "./recipe.service";
 
 @Controller('recipe')
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
+  @Get()
+  async getRecipes() {
+    return this.recipeService.getRecipes();
+  }
+
   @Get(':id')
   async getRecipeById(@Param('id') id: string): Promise<any> {
-    return await this.recipeService.getRecipeById(parseInt(id));
+    let recipe = await this.recipeService.getRecipeById(parseInt(id));
+    if (!recipe) return new NotFoundException(`Recipe ${id} was not found.`)
+    return recipe;
   }
 
-  @Get(':id/image.jpg')
-  async getRecipeImageById(@Param('id') id: string): Promise<any> {
-    return await this.recipeService.getRecipeImageById(parseInt(id));
-  }
-
-  @Get(':id/instruction')
-  async getRecipeInstructionById(@Param('id') id: string): Promise<any> {
-    return await this.recipeService.getRecipeInstructionById(parseInt(id));
-  }
-
-  @Get(':id/instruction.txt')
-  async getRecipeInstructionTextById(@Param('id') id: string): Promise<any> {
-    const instruction = await this.recipeService.getRecipeInstructionById(parseInt(id));
-    if (!instruction) return '';
-    return this.recipeService.transformInstructionToText(instruction);
+  @Get(':id/price')
+  async getMadeRecipePrice(@Param('id') id: string, @Query('made') made: string) {
+    let isMade = this.recipeService.truthValue(made ?? 'false');
+    let price = await this.recipeService.getRecipeTotalPrice(parseInt(id), isMade);
+    if (!price) throw new NotFoundException(`Recipe ${id} was not found.`);
+    return price.toFixed(2);
   }
 }

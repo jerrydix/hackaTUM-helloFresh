@@ -9,18 +9,19 @@ datasource db {
 }
 
 model Recipe {
-  id              Int               @id @default(autoincrement())
+  id              Int          @id @default(autoincrement())
   title           String
+  description     String
+  instructions    String
+  ingredients     Ingredient[]
   imgUrl          String
-  description     String?
   caloriesPerUnit Float?
   carbsPerUnit    Float?
   proteinsPerUnit Float?
   fatsPerUnit     Float
-  fiberPerUnit    Float             @default(0)
+  fiberPerUnit    Float        @default(0)
   vitamins        Json?
   minerals        Json?
-  unit            String
   // Allergy Bit-Field:
   // 1: Contains Celery
   // 2: Contains Gluten
@@ -37,37 +38,21 @@ model Recipe {
   // 4096: Contains Sulphur Dioxide
   // 8192: Contains Soya
   allergyBits     Bytes
-  steps           InstructionStep[]
-}
-
-model InstructionStep {
-  id             Int          @id @default(autoincrement())
-  recipeId       Int
-  actionName     String
-  action         Action       @relation(fields: [actionName], references: [name])
-  additionalData Json?
-  durationUnit   Duration     @default(INSTANT)
-  duration       Int          @default(0)
-  utensils       Utensil[]
-  ingredients    Ingredient[]
-  recipe         Recipe       @relation(fields: [recipeId], references: [id])
 }
 
 model Utensil {
-  id            Int              @id @default(autoincrement())
-  name          String
-  instruction   InstructionStep? @relation(fields: [instructionId], references: [id])
-  instructionId Int?
+  id   Int    @id @default(autoincrement())
+  name String
 }
 
 model Ingredient {
-  id             Int              @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   ingredientType String
   quantity       Float
   unit           String
-  type           IngredientType   @relation(fields: [ingredientType], references: [name])
-  instruction    InstructionStep? @relation(fields: [instructionId], references: [id])
-  instructionId  Int?
+  price          Decimal        @db.Money
+  recipes        Recipe[]
+  type           IngredientType @relation(fields: [ingredientType], references: [name])
 }
 
 model IngredientType {
@@ -93,18 +78,4 @@ enum IngredientCategory {
   CONDIMENTS_AND_SAUCES // Includes ketchup, mustard, soy sauce, etc.
   PROCESSED_FOODS // Includes canned, frozen, or packaged foods
   MISC // For anything that doesn't fit into the above categories
-}
-
-model Action {
-  name        String            @unique
-  template    String
-  instruction InstructionStep[]
-}
-
-enum Duration {
-  INSTANT
-  SECOND
-  MINUTE
-  HOUR
-  DAY
 }
