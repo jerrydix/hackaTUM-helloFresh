@@ -16,17 +16,14 @@ class _MyHomePageState extends State<HomePage> {
   bool AIenabled = false;
   RecipeManager manager = RecipeManager.instance;
 
-  void init() {
+  @override
+  void initState() {
     manager.dataFuture = manager.fetchRecipes();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    init();
-    return ListenableBuilder(
-        listenable: RecipeManager.instance,
-        builder: (BuildContext context, Widget? child) {
-      manager.dataFuture = manager.fetchRecipes();
       return FutureBuilder<void>(
           future: manager.dataFuture,
           builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
@@ -44,7 +41,7 @@ class _MyHomePageState extends State<HomePage> {
                   child: Scaffold(
                     appBar: AppBar(
                       leadingWidth: 100,
-                      title: Image.asset("assets/Orange.png", height: 40, width: 40),
+                      title: Image.asset("assets/OrangeFinal.png", height: 130, width: 130),
                       centerTitle: true,
                       bottom: TabBar(
                         tabs: const [
@@ -117,7 +114,6 @@ class _MyHomePageState extends State<HomePage> {
                                       children: const [
                                         Text("AI"),
                                       ],
-
                                     ),
                                   ]
                               ),
@@ -164,8 +160,7 @@ class _MyHomePageState extends State<HomePage> {
             }
             return const Center(child: CircularProgressIndicator());
           });
-        }
-      );
+
   }
 }
 

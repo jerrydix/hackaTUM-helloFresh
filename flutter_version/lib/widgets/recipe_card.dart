@@ -59,7 +59,7 @@ class _RecipeCardState extends State<RecipeCard> {
                         topLeft: Radius.circular(8),
                         topRight: Radius.circular(8),
                       ),
-                      child: Image.asset(widget.recipe.imagePath, fit: BoxFit.cover),
+                      child: Image.network(widget.recipe.imagePath, fit: BoxFit.cover),
                     ),
                     Column(
                       children: [
@@ -117,6 +117,7 @@ class _RecipeCardState extends State<RecipeCard> {
                         Text( //todo fix alignment
                           widget.recipe.name,
                           style: Theme.of(context).textTheme.headlineSmall,
+                          overflow: TextOverflow.ellipsis,
                         ).frosted(
                           blur: 8,
                           padding: EdgeInsets.all(8),
@@ -136,11 +137,12 @@ class _RecipeCardState extends State<RecipeCard> {
                         SizedBox(
                           width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
                           child: Text(
-                            widget.recipe.name,
+                            widget.recipe.description,
                             style: const TextStyle(
                               fontSize: 18,
                             ),
                             textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         VerticalDivider(

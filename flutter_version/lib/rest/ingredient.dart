@@ -1,10 +1,12 @@
 class Ingredient {
+  final int id;
   final String type;
-  final String quantity;
+  final int quantity;
   final String unit;
-  final double price;
+  final String price;
 
   Ingredient({
+    required this.id,
     required this.type,
     required this.quantity,
     required this.unit,
@@ -13,10 +15,11 @@ class Ingredient {
 
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
-      type: json['name'],
-      quantity: json['quantity'],
-      unit: json['unit'],
-      price: json['price'],
+      id: json['id'] as int,
+      type: json['ingredientType'] as String,
+      quantity: json['quantity'] as int,
+      unit: json['unit'] as String,
+      price: json['price'] as String,
     );
   }
 }

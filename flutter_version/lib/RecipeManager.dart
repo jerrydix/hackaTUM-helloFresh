@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_version/rest/Recipe.dart';
+import 'package:flutter_version/rest/recipe.dart';
 import 'package:flutter_version/widgets/recipe_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,7 +35,11 @@ class RecipeManager with ChangeNotifier {
       for (int i = 0; i < parsed.length; i++) {
         result.add(Recipe.fromJson(parsed[i]));
       }
-      print(result);
+
+      for (Recipe r in result) {
+        allRecipeCards.add(RecipeCard(recipe: r, isFavourite: false,));
+      }
+
     } else {
       throw Exception('Failed to load recipes');
     }
