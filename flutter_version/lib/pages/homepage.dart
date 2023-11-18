@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_version/rest/recipe.dart';
 import 'package:flutter_version/widgets/recipe_card.dart';
+import 'package:flutter_version/widgets/toggles.dart';
 
 import '../RecipeManager.dart';
 
@@ -188,8 +189,33 @@ class _MyHomePageState extends State<HomePage> {
                         const Center(
                           child: Text("It's rainy here"),
                         ),
-                        const Center(
-                          child: Text("It's sunny here"),
+                        Container(
+                          alignment: Alignment.center,
+                          child:
+                              Padding(
+                                padding: EdgeInsets.only(top: 12, bottom: 12, left: MediaQuery.of(context).size.width * 1/10, right: MediaQuery.of(context).size.width * 1/10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child:
+                                      toggles(products: ["Avocado", "Tomato", "Milk", "Potato", "Butter", "Flour", "Egg", "Carrot", "Meat", "Lemaon", "Garlic", "Nuts"], selectedProducts: ["Tomato"]),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 10),
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: const Text("Find recipes"),
+                                        ),
+                                      )
+                                    ),
+
+                            ],
+                          ),
+                        ),
                         ),
                       ],
                     ),

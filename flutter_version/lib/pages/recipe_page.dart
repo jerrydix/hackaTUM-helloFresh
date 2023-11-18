@@ -70,26 +70,49 @@ class _RecipePageState extends State<RecipePage> {
                       padding: EdgeInsets.only(
                           right: MediaQuery.of(context).size.width * 1 / 12,
                           left: 0),
-                      child: SingleChildScrollView(
-                        child: DataTableExample(
-                          title: "Ingredients",
-                          contents: widget.recipe.ingredients,
-                          numItems: widget.recipe.ingredients.length,
-                        ),
-                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
+                        children: [
+                          Text("Ingredients", style: Theme.of(context).textTheme.headlineMedium),
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxHeight: 350.0,
+                              maxWidth: 200.0,
+                            ),
+                            child: DataTableExample(
+                              title: "Ingredients",
+                              contents: widget.recipe.ingredients,
+                              numItems: widget.recipe.ingredients.length,
+                            ),
+                          ),
+                        ],
+                      )
                     ),
                     Padding(
                       padding: EdgeInsets.only(
                           right: 0,
                           left: MediaQuery.of(context).size.width * 1 / 12),
-                      child: Container(
-                        child: DataTableExample2(
-                          title: "Nutrition",
-                          names: ["Calories", "Fat", "Carbs", "Protein"] + List<String>.from(widget.recipe.minerals.keys) + List<String>.from(widget.recipe.vitamins.keys),
-                          values: ['${widget.recipe.calories}', '${widget.recipe.fats}', '${widget.recipe.carbs}', '${widget.recipe.proteins}'] + List<String>.from(widget.recipe.minerals.values) + List<String>.from(widget.recipe.vitamins.values),
-                          numItems: widget.recipe.minerals.length + widget.recipe.vitamins.length + 4,
-                        ),
-                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
+                        children: [
+                          Text("Nutritions", style: Theme.of(context).textTheme.headlineMedium),
+
+                          ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxHeight: 350.0,
+                              maxWidth: 200,
+                            ),
+                            child: DataTableExample2(
+                              title: "Nutrition",
+                              names: ["Calories", "Fat", "Carbs", "Protein"] + List<String>.from(widget.recipe.minerals.keys) + List<String>.from(widget.recipe.vitamins.keys),
+                              values: ['${widget.recipe.calories}', '${widget.recipe.fats}', '${widget.recipe.carbs}', '${widget.recipe.proteins}'] + List<String>.from(widget.recipe.minerals.values) + List<String>.from(widget.recipe.vitamins.values),
+                              numItems: widget.recipe.minerals.length + widget.recipe.vitamins.length + 4,
+                            ),
+                          ),
+                        ],
+                      )
                     ),
                   ],
                 ),

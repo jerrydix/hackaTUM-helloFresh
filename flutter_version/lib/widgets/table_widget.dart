@@ -21,6 +21,8 @@ class _DataTableExampleState extends State<DataTableExample> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: DataTable(
+        headingRowHeight: 0,
+
         columns: <DataColumn>[
           DataColumn(
             label: Text(widget.title),
