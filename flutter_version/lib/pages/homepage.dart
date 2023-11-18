@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_version/rest/recipe.dart';
+import 'package:flutter_version/widgets/recipe_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,25 +24,25 @@ class _MyHomePageState extends State<HomePage> {
           title: Image.asset("assets/Orange.png", height: 40, width: 40),
           centerTitle: true,
           bottom: TabBar(
-            tabs: [
+            tabs: const [
               Tab(icon: Icon(Icons.dinner_dining)),
               Tab(icon: Icon(Icons.local_shipping)),
               Tab(icon: Icon(Icons.kitchen)),
             ],
             splashBorderRadius: BorderRadius.circular(25),
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 8),
-            dividerColor: Colors.transparent,
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 1/10),
+            //dividerColor: Colors.transparent,
           ),
           leading: Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.fitness_center_rounded),
+                  icon: const Icon(Icons.fitness_center_rounded),
                   onPressed: () {}, // TODO: implement
                 ),
                 IconButton(
-                  icon: Icon(Icons.person_outline),
+                  icon: const Icon(Icons.person_outline),
                   onPressed: () {}, // TODO: implement
                 ),
               ],
@@ -49,10 +50,10 @@ class _MyHomePageState extends State<HomePage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.favorite_outline),
+              icon: const Icon(Icons.favorite_outline),
               onPressed: () {},
             ),
-            Padding(padding: EdgeInsets.only(right: 10)),
+            const Padding(padding: EdgeInsets.only(right: 10)),
           ],
         ),
         body: TabBarView(
@@ -60,11 +61,13 @@ class _MyHomePageState extends State<HomePage> {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(24),
+                  padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: SearchBar(
+                    elevation: MaterialStateProperty.all(5),
+
                     hintText: 'Search for recipes...',
                     onChanged: (value) {},
-                    leading: Row(
+                    leading: const Row(
                       children: [
                         Padding(padding: EdgeInsets.only(left: 5)),
                         Icon(Icons.search),
@@ -78,9 +81,6 @@ class _MyHomePageState extends State<HomePage> {
                             AIenabled = !AIenabled;
                           });
                         },
-                        children: const [
-                          Text("AI"),
-                        ],
                         selectedBorderColor: Colors.green[700],
                         selectedColor: Colors.white,
                         fillColor: Colors.green[200],
@@ -90,53 +90,52 @@ class _MyHomePageState extends State<HomePage> {
                           minHeight: 40.0,
                           minWidth: 80.0,
                         ),
+                        children: const [
+                          Text("AI"),
+                        ],
 
                       ),
                     ]
                   ),
                 ),
+                Card(
+                  elevation: 3,
+                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 1/10, right: MediaQuery.of(context).size.width * 1/10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: const ExpansionTile(
+                    shape: Border(),
+                    title: Text("Filters"),
+                    children: [
+                      Text("Expanded content")
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: ListView(
                     children: [
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.fastfood),
-                        title: Text('Food'),
-                        subtitle: Text('Food is any substance consumed to provide nutritional support for an organism. Food is usually of plant, animal or fungal origin, and contains essential nutrients, such as carbohydrates, fats, proteins, vitamins, or minerals.'),
+                      RecipeCard(
+                          recipe: Recipe(
+                              name: 'Chicken Soup',
+                              imagePath: "assets/food_template.jpg",
+                              abstract: 'This is a recipe for chicken soup',
+                              description: 'This is a recipe for chicken soup',
+                              time: DateTime.now(),
+                              ingredients: ['Chicken', 'Soup'],
+                              steps: ['Cook', 'Eat'],
+                          )
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            Center(
+            const Center(
               child: Text("It's rainy here"),
             ),
-            Center(
+            const Center(
               child: Text("It's sunny here"),
             ),
           ],
