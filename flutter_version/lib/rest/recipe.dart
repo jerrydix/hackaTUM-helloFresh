@@ -20,7 +20,7 @@ class Recipe {
   final int fiber;
   final Map<String, String> vitamins;
   final Map<String, String> minerals;
-  final List<dynamic> allergyBits;
+  final int allergyBits;
   final List<Ingredient> ingredients;
   late String timeString;
 
@@ -75,7 +75,7 @@ class Recipe {
       fiber: json['fiberPerUnit'] as int,
       vitamins: Map.from(json['vitamins']),
       minerals: Map.from(json['minerals']),
-      allergyBits: json['allergyBits']['data'] as List<dynamic>,
+      allergyBits: json['allergyBits'] as int,
       ingredients: ingredientList,
       );
   }
