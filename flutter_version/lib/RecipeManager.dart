@@ -24,14 +24,14 @@ class RecipeManager with ChangeNotifier {
   Future<List<Recipe>> fetchRecipes() async {
 
     List<Recipe> result = [];
-    var response = await http.get(Uri.parse('http://75.119.136.109:3000/recipe'), headers: {"Access-Control-Allow-Origin": "*", "Content-Type": "application/json","Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7", "Accept-Encoding": "gzip, deflate"});
-    print(response.body);
+    var response = await http.get(Uri.parse('http://75.119.136.109:3000/recipe')); /*headers: {"Access-Control-Allow-Origin": "*", "Content-Type": "application/json","Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*\/*;q=0.8,application/signed-exchange;v=b3;q=0.7", "Accept-Encoding": "gzip, deflate"});*/*/
+    //print(response.body);
 
     if (response.statusCode == 200) {
       //todo do for all recipes (loop over recipe json)
-      print(response.body);
+      //print(response.body);
       final parsed = (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
-      print(parsed);
+      //print(parsed);
       for (int i = 0; i < parsed.length; i++) {
         result.add(Recipe.fromJson(parsed[i]));
       }

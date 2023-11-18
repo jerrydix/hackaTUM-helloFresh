@@ -22,7 +22,7 @@ class _MyHomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    /*init();
+    init();
     return ListenableBuilder(
         listenable: RecipeManager.instance,
         builder: (BuildContext context, Widget? child) {
@@ -37,7 +37,7 @@ class _MyHomePageState extends State<HomePage> {
               default:
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
-                }*/
+                }
                 return DefaultTabController(
                   initialIndex: 0,
                   length: 3,
@@ -161,11 +161,11 @@ class _MyHomePageState extends State<HomePage> {
                       ],
                     ),
                   ),);
-            /*}
+            }
             return const Center(child: CircularProgressIndicator());
           });
         }
-      )*/
+      );
   }
 }
 
