@@ -9,7 +9,11 @@ export class RecipeController {
 
   @Get()
   @ApiOkResponse({ description: 'Gets all recipes from the database.' })
-  async getRecipes() {
+  @ApiQuery({ name: 'query', description: 'Recipe search term',  required: false })
+  async getRecipes(@Query('query') query: string) {
+    if (query) {
+      return this.recipeService.searchRecipes(query);
+    }
     return this.recipeService.getRecipes();
   }
 

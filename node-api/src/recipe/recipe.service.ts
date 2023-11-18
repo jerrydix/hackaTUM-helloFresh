@@ -35,6 +35,18 @@ export class RecipeService implements OnModuleInit {
     });
   }
 
+  async searchRecipes(term: string) {
+    return this.prisma.recipe.findMany({
+      where: {
+        OR: [
+          { title: { contains: term } },
+          { description: { contains: term } },
+          { ingredients: { some: { ingredientType: { contains: term } } } }
+        ]
+      }
+    });
+  }
+
   truthValue(data: string) {
     const cmp = data.toLowerCase();
     return cmp === 'yes' || cmp === 'true' || parseInt(cmp) > 0;
