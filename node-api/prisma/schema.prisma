@@ -8,11 +8,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Profile {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  allergyBits Bytes
+  orderSize   OrderSize @default(SMALL)
+}
+
+enum OrderSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
 model Recipe {
   id              Int          @id @default(autoincrement())
   title           String
   description     String
+  duration        Int
   instructions    String
+  utensils        Utensil[]
   ingredients     Ingredient[]
   imgUrl          String
   caloriesPerUnit Float?
@@ -41,8 +57,8 @@ model Recipe {
 }
 
 model Utensil {
-  id   Int    @id @default(autoincrement())
-  name String
+  name    String   @id
+  recipes Recipe[]
 }
 
 model Ingredient {

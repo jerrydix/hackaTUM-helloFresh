@@ -42,17 +42,17 @@ export class RecipeService implements OnModuleInit {
   }
 
   async init() {
-    await this.prisma.ingredient.deleteMany({ where: { id: { gt: -1 } } });
-    await this.prisma.recipe.deleteMany({ where: { id: { gt: -1 } } });
-    await this.prisma.ingredientType.deleteMany({ where: { name: { not: '' } } });
+    await this.prisma.utensil.deleteMany({})
+    await this.prisma.ingredient.deleteMany({});
+    await this.prisma.recipe.deleteMany({});
+    await this.prisma.ingredientType.deleteMany({});
 
     const { default: ingredientMap } = await import('./resources/ingredients');
-    const ingredients: { [key: string]: any } = {};
     for (const ingredientType in ingredientMap) {
       const category = IngredientCategory[ingredientType as keyof typeof IngredientCategory];
 
       for (const ingredient of ingredientMap[category]) {
-        ingredients[ingredient] = await this.prisma.ingredientType.create({
+        await this.prisma.ingredientType.create({
           data: {
             name: ingredient,
             category,
@@ -60,6 +60,12 @@ export class RecipeService implements OnModuleInit {
         });
         this.logger.log(`Created '${ingredient}' ingredient type.`);
       }
+    }
+
+    const { default: utensils } = await import('./resources/utensils');
+    for (const utensil of utensils) {
+      await this.prisma.utensil.create({ data: { name: utensil } });
+      this.logger.log(`Created '${utensil}' cooking utensil.`);
     }
 
     const { default: recipes } = await import('./resources/recipes');
