@@ -81,7 +81,7 @@ export class ProfileController {
   @ApiUnauthorizedResponse({ description: 'No profile currently selected' })
   async setAllergy(@Session() session: Record<string, any>, @Body() { data }: AllergyWrapper) {
     if (!session.user_id) throw new UnauthorizedException();
-    return await this.profileService.setAllergies(session.user_id, Buffer.from(data));
+    return await this.profileService.setAllergies(session.user_id, parseInt(data.join(''), 2));
   }
 
   @Post('size')

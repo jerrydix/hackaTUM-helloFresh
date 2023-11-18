@@ -31,7 +31,7 @@ export default [
       Calcium: '15% of RDA',
       Iron: '20% of RDA',
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         {
@@ -169,7 +169,7 @@ export default [
       Calcium: '20% of RDA',
       Iron: '25% of RDA',
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         {
@@ -301,7 +301,7 @@ export default [
       Calcium: "15% of RDA",
       Iron: "20% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "chicken breast", quantity: 200, unit: "gram", price: new Decimal(3.0) },
@@ -360,7 +360,7 @@ export default [
       Calcium: "5% of RDA",
       Iron: "10% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "portobello mushroom", quantity: 1, unit: "piece", price: new Decimal(1.0) },
@@ -413,7 +413,7 @@ export default [
       Calcium: "10% of RDA",
       Iron: "15% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "broccoli", quantity: 100, unit: "gram", price: new Decimal(1.0) },
@@ -466,7 +466,7 @@ export default [
       Calcium: "10% of RDA",
       Iron: "8% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "potato", quantity: 500, unit: "gram", price: new Decimal(1.0) },
@@ -514,7 +514,7 @@ export default [
       Calcium: "15% of RDA",
       Iron: "10% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "conchiglie pasta", quantity: 200, unit: "gram", price: new Decimal(1.2) },
@@ -566,7 +566,7 @@ export default [
       Calcium: "6% of RDA",
       Iron: "12% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "potato", quantity: 200, unit: "gram", price: new Decimal(0.8) },
@@ -615,7 +615,7 @@ export default [
       Calcium: "10% of RDA",
       Iron: "8% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "potato", quantity: 300, unit: "gram", price: new Decimal(1.0) },
@@ -664,7 +664,7 @@ export default [
       Calcium: "8% of RDA",
       Iron: "15% of RDA"
     },
-    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    allergyBits: 0,
     ingredients: {
       create: [
         { ingredientType: "spaghetti", quantity: 200, unit: "gram", price: new Decimal(1.2) },
