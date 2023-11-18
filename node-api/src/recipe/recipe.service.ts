@@ -1,9 +1,14 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { PrismaService } from '@/prisma.service';
-import { IngredientCategory } from '#/index';
+import { Ingredient, IngredientCategory, Profile } from "#/index";
 import { Prisma } from "#/index";
 
 import Decimal = Prisma.Decimal;
+
+type PreferenceProfile = Profile & {
+  preferences: Ingredient[];
+  exclusions: Ingredient[];
+};
 
 @Injectable()
 export class RecipeService implements OnModuleInit {
@@ -27,25 +32,39 @@ export class RecipeService implements OnModuleInit {
     return cost;
   }
 
-  async getRecipes() {
-    return this.prisma.recipe.findMany({
-      include: {
-        ingredients: true,
-        utensils: true
-      }
+  async getRecipes(user: PreferenceProfile) {
+    let exclusions = user.exclusions.map((ingredient) => ingredient.id);
+    /* Filter by Preferences */
+    let result = await this.prisma.recipe.findMany({
+      where: { ingredients: { none: { id: { in: exclusions } } } },
+      include: { ingredients: true, utensils: true }
     });
+    /* Filter by Allergies */
+    result = result.filter((recipe) => {
+      return (recipe.allergyBits & user.allergyBits) === 0;
+    });
+    return result;
   }
 
-  async searchRecipes(term: string) {
-    return this.prisma.recipe.findMany({
+  async searchRecipes(user: PreferenceProfile, term: string) {
+    let exclusions = user.exclusions.map((ingredient) => ingredient.id);
+    /* Filter by Preferences */
+    let result = await this.prisma.recipe.findMany({
       where: {
+        ingredients: { none: { id: { in: exclusions } } },
         OR: [
           { title: { contains: term } },
           { description: { contains: term } },
           { ingredients: { some: { ingredientType: { contains: term } } } }
         ]
-      }
+      },
+      include: { ingredients: true, utensils: true }
     });
+    /* Filter by Allergies */
+    result = result.filter((recipe) => {
+      return (recipe.allergyBits & user.allergyBits) === 0;
+    });
+    return result;
   }
 
   truthValue(data: string) {

@@ -16,6 +16,7 @@ class RecipeManager with ChangeNotifier {
   List<Recipe> allRecipes = [];
   List<RecipeCard> allRecipeCards = [];
   Future<void> dataFuture = Future(() => null);
+  List<RecipeCard> filteredRecipeCards = [];
 
   late ValueNotifier<int> favoritesValue = ValueNotifier(favouriteRecipeCards.length);
 
@@ -45,8 +46,5 @@ class RecipeManager with ChangeNotifier {
     }
     return result;
   }
-
-
-
 
 }

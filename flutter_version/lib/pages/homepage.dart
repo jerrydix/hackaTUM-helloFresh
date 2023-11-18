@@ -15,6 +15,8 @@ class _MyHomePageState extends State<HomePage> {
   final bodyPadding = 24.0;
   bool AIenabled = false;
   RecipeManager manager = RecipeManager.instance;
+  TextEditingController controller = TextEditingController();
+  List<RecipeCard> recipeCards = RecipeManager.instance.allRecipeCards;
 
   @override
   void initState() {
@@ -24,6 +26,7 @@ class _MyHomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
       return FutureBuilder<void>(
           future: manager.dataFuture,
           builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
@@ -83,18 +86,52 @@ class _MyHomePageState extends State<HomePage> {
                         Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 12, bottom: 12),
-                              child: SearchBar(
-                                  elevation: MaterialStateProperty.all(5),
-                                  hintText: 'Search for recipes...',
-                                  onChanged: (value) {},
-                                  leading: const Row(
-                                    children: [
-                                      Padding(padding: EdgeInsets.only(left: 5)),
-                                      Icon(Icons.search),
-                                    ],
+                              padding: EdgeInsets.only(top: 12, bottom: 12, left: MediaQuery.of(context).size.width * 1/10, right: MediaQuery.of(context).size.width * 1/10),
+                              child: TextField(
+                                  controller: controller,
+                                  onChanged: (value) {
+                                      filterRecipes(value);
+                                  },
+                                  decoration: InputDecoration(
+                                    prefixIcon: const Icon(Icons.search),
+                                    contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                                    fillColor: Theme.of(context).colorScheme.secondaryContainer,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+                                    ),
+                                    filled: true,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+                                    ),
+                                    hintText: "Search for recipes...",
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.only(right: 3),
+                                      child: ToggleButtons(
+                                        isSelected: [AIenabled],
+                                        onPressed: (index) {
+                                          setState(() {
+                                            AIenabled = !AIenabled;
+                                          });
+                                        },
+                                        selectedBorderColor: Colors.green[700],
+                                        selectedColor: Colors.white,
+                                        fillColor: Colors.green[200],
+                                        color: Colors.green[400],
+                                        borderRadius: BorderRadius.circular(7),
+                                        constraints: const BoxConstraints(
+                                          minHeight: 40.0,
+                                          minWidth: 80.0,
+                                        ),
+                                        children: const [
+                                          Text("AI"),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  trailing: [
+                                ),
+                                  /*trailing: [
                                     ToggleButtons(
                                       isSelected: [AIenabled],
                                       onPressed: (index) {
@@ -116,7 +153,7 @@ class _MyHomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ]
-                              ),
+                              ),*/
                             ),
                             Card(
                               elevation: 3,
@@ -139,7 +176,7 @@ class _MyHomePageState extends State<HomePage> {
                                   builder: (BuildContext context, int value, child ) {
                                     return ListView(
                                       children: [
-                                        for (var recipeCard in RecipeManager.instance.allRecipeCards)
+                                        for (var recipeCard in recipeCards)
                                           recipeCard,
                                       ],
                                     );
@@ -161,6 +198,15 @@ class _MyHomePageState extends State<HomePage> {
             return const Center(child: CircularProgressIndicator());
           });
 
+  }
+
+  void filterRecipes(String value) {
+    recipeCards = RecipeManager.instance.allRecipeCards;
+    setState(() {
+      recipeCards = recipeCards.where((element) =>
+          element.recipe.name.toLowerCase().contains(value.toLowerCase()) || element.recipe.description.contains(value.toLowerCase()) || element.recipe.ingredients.contains(value.toLowerCase()) || element.recipe.steps.contains(value.toLowerCase())
+      ).toList();
+    });
   }
 }
 
