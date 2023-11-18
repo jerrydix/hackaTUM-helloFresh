@@ -386,5 +386,208 @@ export default [
         { name: "tongs" }
       ]
     }
+  },
+  {
+    title: "Stir Fry! Pan Vegetables with Peanut-Chili Sauce",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/stir-fry-bratpfannengemuse-mit-erdnuss-peperoncini-sauce-c186ce6e-f141eb2b.jpg",
+    duration: 40,
+    difficulty: Difficulty.MEDIUM,
+    description: "A vibrant and flavorful stir-fry featuring fresh vegetables and a rich peanut-chili sauce.",
+    instructions: [
+      "Prepare Vegetables: Chop broccoli, bell pepper, carrot, and snap peas.",
+      "Cook Vegetables: In a wok, heat vegetable oil and stir-fry the vegetables until tender.",
+      "Make Peanut-Chili Sauce: Whisk together peanut butter, soy sauce, honey, chili flakes, garlic, and a bit of water.",
+      "Combine: Toss the cooked vegetables with the peanut-chili sauce.",
+      "Serve: Drizzle sesame oil over the top and serve."
+    ].join('\n'),
+    caloriesPerUnit: 400,
+    proteinsPerUnit: 12,
+    carbsPerUnit: 35,
+    fatsPerUnit: 22,
+    fiberPerUnit: 6,
+    vitamins: {
+      A: "35% of RDA",
+      C: "60% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "15% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "broccoli", quantity: 100, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "bell pepper", quantity: 100, unit: "gram", price: new Decimal(0.7) },
+        { ingredientType: "carrot", quantity: 50, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "snap peas", quantity: 50, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "peanut butter", quantity: 30, unit: "gram", price: new Decimal(0.4) },
+        { ingredientType: "soy sauce", quantity: 15, unit: "ml", price: new Decimal(0.2) },
+        { ingredientType: "honey", quantity: 10, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "chili flakes", quantity: 1, unit: "gram", price: new Decimal(0.05) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "sesame oil", quantity: 5, unit: "ml", price: new Decimal(0.2) },
+        { ingredientType: "vegetable oil", quantity: 15, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "wok" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "mixing bowl" },
+        { name: "whisk" }
+      ]
+    }
+  },
+  {
+    title: "Loaded Smashed Potatoes",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/loaded-smashed-potatoes-1a652803-6bbca072.jpg",
+    description: "Crispy smashed potatoes topped with melted cheese, crispy bacon bits, and fresh chives for a savory and indulgent treat.",
+    instructions: [
+      "Boil Potatoes: Boil potatoes until tender, then drain.",
+      "Smash and Bake: Place potatoes on a baking sheet, gently smash, drizzle with olive oil, salt, and pepper, and bake until crispy.",
+      "Add Toppings: Sprinkle with cheddar cheese and bacon, then bake until cheese melts.",
+      "Garnish: Top with fresh chives and serve."
+    ].join('\n'),
+    duration: 16,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 350,
+    proteinsPerUnit: 15,
+    carbsPerUnit: 30,
+    fatsPerUnit: 18,
+    fiberPerUnit: 3,
+    vitamins: {
+      A: "10% of RDA",
+      C: "15% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "8% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "potato", quantity: 500, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "cheddar cheese", quantity: 50, unit: "gram", price: new Decimal(0.7) },
+        { ingredientType: "bacon", quantity: 30, unit: "gram", price: new Decimal(0.8) },
+        { ingredientType: "chives", quantity: 10, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "olive oil", quantity: 20, unit: "ml", price: new Decimal(0.2) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "oven" },
+        { name: "baking sheet" },
+        { name: "potato masher" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+  {
+    title: "Conchiglie in Vegetable Fresh Cream Sauce",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_R27_W47_DE_EXP3493-6_Main__2low-9d3fc97c.jpg",
+    description: "Conchiglie pasta tossed in a light and creamy vegetable sauce, featuring fresh zucchini, carrot, and bell pepper.",
+    instructions: [
+      "Cook Pasta: Boil conchiglie pasta until al dente, then drain.",
+      "Prepare Vegetables: Slice zucchini, carrot, and bell pepper.",
+      "Make Sauce: In a pan, cook vegetables, then add flour and heavy cream to form a creamy sauce.",
+      "Combine: Toss the cooked pasta with the vegetable cream sauce.",
+      "Serve: Garnish with grated Parmesan cheese and fresh basil."
+    ].join('\n'),
+    duration: 45,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 480,
+    proteinsPerUnit: 15,
+    carbsPerUnit: 65,
+    fatsPerUnit: 20,
+    fiberPerUnit: 4,
+    vitamins: {
+      A: "25% of RDA",
+      C: "30% of RDA"
+    },
+    minerals: {
+      Calcium: "15% of RDA",
+      Iron: "10% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "conchiglie pasta", quantity: 200, unit: "gram", price: new Decimal(1.2) },
+        { ingredientType: "zucchini", quantity: 100, unit: "gram", price: new Decimal(0.7) },
+        { ingredientType: "carrot", quantity: 50, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "bell pepper", quantity: 50, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "heavy cream", quantity: 100, unit: "ml", price: new Decimal(0.8) },
+        { ingredientType: "parmesan cheese", quantity: 30, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "basil", quantity: 5, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "flour", quantity: 15, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "pot" },
+        { name: "frying pan" },
+        { name: "colander" },
+        { name: "whisk" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+  {
+    title: "Winter Potato Pan with Cauliflower",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_R29_W47_DE_EXP4283-2_Main__5low-1fd25d6f.jpg",
+    description: "A hearty and comforting winter dish featuring a savory blend of potatoes, cauliflower, and carrots, seasoned with rosemary and thyme.",
+    instructions: [
+      "Prepare Vegetables: Chop potatoes, cauliflower, carrots, and onions.",
+      "Cook Vegetables: In a large pan, heat olive oil and butter, add all vegetables, and cook until tender.",
+      "Season: Add rosemary, thyme, salt, and pepper, and stir well.",
+      "Serve: Serve hot, garnished with fresh herbs if desired."
+    ].join('\n'),
+    duration: 40,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 300,
+    proteinsPerUnit: 8,
+    carbsPerUnit: 45,
+    fatsPerUnit: 10,
+    fiberPerUnit: 7,
+    vitamins: {
+      A: "20% of RDA",
+      C: "70% of RDA"
+    },
+    minerals: {
+      Calcium: "6% of RDA",
+      Iron: "12% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "potato", quantity: 200, unit: "gram", price: new Decimal(0.8) },
+        { ingredientType: "cauliflower", quantity: 200, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "carrot", quantity: 100, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "butter", quantity: 20, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "rosemary", quantity: 2, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "thyme", quantity: 2, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "wok" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "pot" }
+      ]
+    }
   }
 ];
