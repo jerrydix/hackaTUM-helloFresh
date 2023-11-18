@@ -10,16 +10,17 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   final bodyPadding = 24.0;
+  bool AIenabled = false;
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        initialIndex: 1,
+        initialIndex: 0,
         length: 3,
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 100,
-          title: const Text('RecipeApp'),
+          title: Image.asset("assets/Orange.png", height: 40, width: 40),
           centerTitle: true,
           bottom: TabBar(
             tabs: [
@@ -27,6 +28,7 @@ class _MyHomePageState extends State<HomePage> {
               Tab(icon: Icon(Icons.local_shipping)),
               Tab(icon: Icon(Icons.kitchen)),
             ],
+            splashBorderRadius: BorderRadius.circular(25),
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 8),
             dividerColor: Colors.transparent,
           ),
@@ -60,13 +62,35 @@ class _MyHomePageState extends State<HomePage> {
                 Padding(
                   padding: EdgeInsets.all(24),
                   child: SearchBar(
-                    hintText: 'Search',
+                    hintText: 'Search for recipes...',
                     onChanged: (value) {},
-                    leading: Icon(Icons.search),
+                    leading: Row(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 5)),
+                        Icon(Icons.search),
+                      ],
+                    ),
                     trailing: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Filter'),
+                      ToggleButtons(
+                        isSelected: [AIenabled],
+                        onPressed: (index) {
+                          setState(() {
+                            AIenabled = !AIenabled;
+                          });
+                        },
+                        children: const [
+                          Text("AI"),
+                        ],
+                        selectedBorderColor: Colors.green[700],
+                        selectedColor: Colors.white,
+                        fillColor: Colors.green[200],
+                        color: Colors.green[400],
+                        borderRadius: BorderRadius.circular(25),
+                        constraints: const BoxConstraints(
+                          minHeight: 40.0,
+                          minWidth: 80.0,
+                        ),
+
                       ),
                     ]
                   ),
