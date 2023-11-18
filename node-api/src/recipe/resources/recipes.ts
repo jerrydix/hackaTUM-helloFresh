@@ -1,5 +1,6 @@
-import { Prisma } from '#/index';
+import { $Enums, Prisma } from "#/index";
 import Decimal = Prisma.Decimal;
+import Difficulty = $Enums.Difficulty;
 
 // noinspection SpellCheckingInspection
 export default [
@@ -8,6 +9,7 @@ export default [
     imgUrl:
       'https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/bunt-gefullter-wrap-mit-falafelballchen-7663096a-503717b5.jpg',
     duration: 50,
+    difficulty: Difficulty.MEDIUM,
     description:
       'A wholesome and vibrant wrap filled with crispy falafel balls, fresh vegetables, and a tangy yogurt sauce.',
     instructions: [
@@ -145,6 +147,7 @@ export default [
     imgUrl:
       'https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/rigatoni-in-pikanter-gemusesauce-kalamata-oliven-81e4fabd-01be3b70.jpg',
     duration: 25,
+    difficulty: Difficulty.EASY,
     description:
       'Hearty rigatoni pasta in a rich, spicy vegetable sauce, complemented with the distinctive flavor of Kalamata olives.',
     instructions: [
@@ -276,6 +279,7 @@ export default [
     title: "Tikka Masala Curry with Sweet Potato",
     imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/tikka-masala-curry-80b817d9-97a11a1e.jpg",
     duration: 90,
+    difficulty: Difficulty.HARD,
     description: "A flavorful Tikka Masala Curry featuring tender sweet potatoes and chicken, infused with a blend of aromatic spices.",
     instructions: [
       "Prepare Ingredients: Dice sweet potatoes, chop onions, and mince garlic and ginger.",
@@ -334,6 +338,7 @@ export default [
     title: "Breaded Portobello with Sweet Chili Ketchup",
     imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_R25_W31_DE_R3649-7_Main__3_low-c01d9208.jpg",
     duration: 15,
+    difficulty: Difficulty.MEDIUM,
     description: "A succulent, breaded Portobello mushroom paired with a tangy sweet chili ketchup, creating a delightful blend of flavors and textures.",
     instructions: [
       "Prepare Portobello: Clean and stem the Portobello mushroom.",

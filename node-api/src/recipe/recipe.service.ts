@@ -30,7 +30,8 @@ export class RecipeService implements OnModuleInit {
   async getRecipes() {
     return this.prisma.recipe.findMany({
       include: {
-        ingredients: true
+        ingredients: true,
+        utensils: true
       }
     });
   }
