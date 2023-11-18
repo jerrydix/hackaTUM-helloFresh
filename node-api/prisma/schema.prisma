@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id              Int               @id @default(autoincrement())
+  title           String
+  imgUrl          String
+  description     String?
+  caloriesPerUnit Float?
+  carbsPerUnit    Float?
+  proteinsPerUnit Float?
+  fatsPerUnit     Float
+  fiberPerUnit    Float             @default(0)
+  vitamins        Json?
+  minerals        Json?
+  unit            String
+  // Allergy Bit-Field:
+  // 1: Contains Celery
+  // 2: Contains Gluten
+  // 4: Contains Crustaceans
+  // 8: Contains Eggs
+  // 16: Contains Fish
+  // 32: Contains Lupin
+  // 64: Contains Milk
+  // 128: Contains Molluscs
+  // 256: Contains Mustard
+  // 512: Contains Nuts
+  // 1024: Contains Peanuts
+  // 2048: Contains Sesame Seeds
+  // 4096: Contains Sulphur Dioxide
+  // 8192: Contains Soya
+  allergyBits     Bytes
+  steps           InstructionStep[]
+}
+
+model InstructionStep {
+  id             Int          @id @default(autoincrement())
+  recipeId       Int
+  actionName     String
+  action         Action       @relation(fields: [actionName], references: [name])
+  additionalData Json?
+  durationUnit   Duration     @default(INSTANT)
+  duration       Int          @default(0)
+  utensils       Utensil[]
+  ingredients    Ingredient[]
+  recipe         Recipe       @relation(fields: [recipeId], references: [id])
+}
+
+model Utensil {
+  id            Int              @id @default(autoincrement())
+  name          String
+  instruction   InstructionStep? @relation(fields: [instructionId], references: [id])
+  instructionId Int?
+}
+
+model Ingredient {
+  id             Int              @id @default(autoincrement())
+  ingredientType String
+  quantity       Float
+  unit           String
+  type           IngredientType   @relation(fields: [ingredientType], references: [name])
+  instruction    InstructionStep? @relation(fields: [instructionId], references: [id])
+  instructionId  Int?
+}
+
+model IngredientType {
+  name        String             @unique
+  category    IngredientCategory
+  ingredients Ingredient[]
+}
+
+enum IngredientCategory {
+  DAIRY_AND_EGGS // Includes all dairy products and eggs
+  MEAT // Includes all types of meat like beef, pork, chicken
+  SEAFOOD // Includes fish and shellfish
+  VEGETABLES // Includes all kinds of vegetables
+  FRUITS // Includes all kinds of fruits
+  GRAINS_AND_CEREALS // Includes rice, wheat, oats, etc.
+  LEGUMES // Includes beans, lentils, peas, etc.
+  NUTS_AND_SEEDS // Includes all kinds of nuts and seeds
+  HERBS_AND_SPICES // Includes culinary herbs and spices
+  SWEETENERS // Includes sugar, honey, syrups, and other sweeteners
+  OILS_AND_FATS // Includes cooking oils, butter, lard, etc.
+  BEVERAGES // Includes drinks, both alcoholic and non-alcoholic
+  BAKING_AND_COOKING_INGREDIENTS // Includes flour, baking powder, yeast, etc.
+  CONDIMENTS_AND_SAUCES // Includes ketchup, mustard, soy sauce, etc.
+  PROCESSED_FOODS // Includes canned, frozen, or packaged foods
+  MISC // For anything that doesn't fit into the above categories
+}
+
+model Action {
+  name        String            @unique
+  template    String
+  instruction InstructionStep[]
+}
+
+enum Duration {
+  INSTANT
+  SECOND
+  MINUTE
+  HOUR
+  DAY
+}
