@@ -41,6 +41,7 @@ dependencies:
   flutter_expanded_tile: ^0.3.7
   animations: ^2.0.8
   flutter_tts: ^3.8.3
+  b: ^0.1.2
 
 dev_dependencies:
   flutter_test:
