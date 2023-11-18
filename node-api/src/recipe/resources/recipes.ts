@@ -589,5 +589,106 @@ export default [
         { name: "pot" }
       ]
     }
-  }
+  },
+  {
+    title: "Warm Potato Salad with Mozzarella, Baby Spinach, and Pumpkin Seed Oil",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/warmer-kartoffelsalat-mit-mozzarella-und-kurbiskernol-thermomix-55f46985-11a2b356.jpg",
+    description: "A delightful warm potato salad with soft mozzarella, fresh baby spinach, and a drizzle of rich pumpkin seed oil.",
+    instructions: [
+      "Boil Potatoes: Cook potatoes until tender, then slice them.",
+      "Assemble Salad: In a salad bowl, combine sliced potatoes, baby spinach, and mozzarella.",
+      "Dress and Season: Drizzle with pumpkin seed oil, olive oil, vinegar, salt, and pepper.",
+      "Serve: Toss gently and serve warm."
+    ].join('\n'),
+    duration: 30,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 320,
+    proteinsPerUnit: 12,
+    carbsPerUnit: 38,
+    fatsPerUnit: 14,
+    fiberPerUnit: 4,
+    vitamins: {
+      A: "15% of RDA",
+      C: "25% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "8% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "potato", quantity: 300, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "mozzarella", quantity: 100, unit: "gram", price: new Decimal(1.2) },
+        { ingredientType: "baby spinach", quantity: 50, unit: "gram", price: new Decimal(0.8) },
+        { ingredientType: "pumpkin seed oil", quantity: 10, unit: "ml", price: new Decimal(0.7) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "vinegar", quantity: 5, unit: "ml", price: new Decimal(0.05) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) },
+        { ingredientType: "pumpkin seed", quantity: 10, unit: "gram", price: new Decimal(0.5) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "pot" },
+        { name: "salad bowl" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+  {
+    title: "Spaghetti with Bell Pepper Cream Sauce & Pine Nuts",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/spaghetti-mit-peperonicremesauce-thermomix-7a1ae671-a63c81e5.jpg",
+    description: "A luscious spaghetti dish featuring a smooth bell pepper cream sauce, topped with toasted pine nuts.",
+    instructions: [
+      "Cook Spaghetti: Boil spaghetti until al dente, then drain.",
+      "Prepare Sauce: Sauté onion and garlic, add bell pepper, and cook until soft. Blend with heavy cream to create a creamy sauce.",
+      "Toast Pine Nuts: In a dry pan, lightly toast pine nuts until golden.",
+      "Combine: Toss the cooked spaghetti with the bell pepper cream sauce.",
+      "Serve: Top with toasted pine nuts and fresh basil."
+    ].join('\n'),
+    duration: 30,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 520,
+    proteinsPerUnit: 15,
+    carbsPerUnit: 70,
+    fatsPerUnit: 22,
+    fiberPerUnit: 6,
+    vitamins: {
+      A: "20% of RDA",
+      C: "50% of RDA"
+    },
+    minerals: {
+      Calcium: "8% of RDA",
+      Iron: "15% of RDA"
+    },
+    allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    ingredients: {
+      create: [
+        { ingredientType: "spaghetti", quantity: 200, unit: "gram", price: new Decimal(1.2) },
+        { ingredientType: "bell pepper", quantity: 150, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "heavy cream", quantity: 100, unit: "ml", price: new Decimal(0.9) },
+        { ingredientType: "pine nut", quantity: 20, unit: "gram", price: new Decimal(1.5) },
+        { ingredientType: "basil", quantity: 5, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "pot" },
+        { name: "frying pan" },
+        { name: "blender" },
+        { name: "colander" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+
 ];
