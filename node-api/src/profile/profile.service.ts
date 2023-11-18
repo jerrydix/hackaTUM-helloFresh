@@ -1,9 +1,25 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, OnModuleInit } from "@nestjs/common";
 import { PrismaService } from "@/prisma.service";
+import { Buffer } from "buffer";
 
 @Injectable()
-export class ProfileService {
+export class ProfileService implements OnModuleInit {
   constructor(private prisma: PrismaService) {}
+
+  initialProfile: undefined | number;
+
+  async onModuleInit() {
+    let exists = await this.findProfile("Anonymous");
+    if (exists) {
+      this.initialProfile = exists.id;
+      return;
+    }
+
+    let profile = await this.createProfile("Anonymous");
+    if (profile) {
+      this.initialProfile = profile.id;
+    }
+  }
 
   async createProfile(name: string) {
     let alreadyExists = await this.prisma.profile.findUnique({ where: { name: name } });
@@ -12,7 +28,7 @@ export class ProfileService {
     return this.prisma.profile.create({
       data: {
         name: name,
-        allergyBits: Buffer.from([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
+        allergyBits: 0,
       },
     });
   }
@@ -27,9 +43,21 @@ export class ProfileService {
 
   async findProfile(id: number | string) {
     if (typeof id === 'number') {
-      return this.prisma.profile.findUnique({ where: { id: id } });
+      return this.prisma.profile.findUnique({
+        where: { id: id },
+        include: {
+          preferences: true,
+          exclusions: true
+        }
+      });
     } else {
-      return this.prisma.profile.findUnique({ where: { name: id } });
+      return this.prisma.profile.findUnique({
+        where: { name: id },
+        include: {
+          preferences: true,
+          exclusions: true
+        }
+      });
     }
   }
 
@@ -83,7 +111,7 @@ export class ProfileService {
     }
   }
 
-  async setAllergies(id: number, bits: Buffer) {
+  async setAllergies(id: number, bits: number) {
     let user = await this.findProfile(id);
     if (user) {
       return this.prisma.profile.update({

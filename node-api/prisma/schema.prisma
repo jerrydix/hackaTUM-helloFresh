@@ -15,7 +15,7 @@ model Profile {
   preferences Ingredient[] @relation("liked_by")
   exclusions  Ingredient[] @relation("disliked_by")
 
-  allergyBits Bytes
+  allergyBits Int       @default(0)
   orderSize   OrderSize @default(SMALL)
 }
 
@@ -63,7 +63,7 @@ model Recipe {
   // 2048: Contains Sesame Seeds
   // 4096: Contains Sulphur Dioxide
   // 8192: Contains Soya
-  allergyBits     Bytes
+  allergyBits     Int          @default(0)
 }
 
 model Utensil {

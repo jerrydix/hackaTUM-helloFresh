@@ -1,20 +1,40 @@
-import { Controller, Get, NotFoundException, Param, Query } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Query,
+  Session, UnauthorizedException
+} from "@nestjs/common";
 import { RecipeService } from "./recipe.service";
 import { ApiNotFoundResponse, ApiOkResponse, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ProfileService } from "@/profile/profile.service";
 
 @ApiTags('Recipe')
 @Controller('recipe')
 export class RecipeController {
-  constructor(private readonly recipeService: RecipeService) {}
+  constructor(
+    private readonly recipeService: RecipeService,
+    private readonly profileService: ProfileService
+  ) {}
 
   @Get()
   @ApiOkResponse({ description: 'Gets all recipes from the database.' })
   @ApiQuery({ name: 'query', description: 'Recipe search term',  required: false })
-  async getRecipes(@Query('query') query: string) {
+  async getRecipes(@Session() session: Record<string, any>, @Query('query') query: string) {
+    let user;
+    if (session.user_id) {
+      user = (await this.profileService.findProfile(session.user_id))!;
+      this.profileService.initialProfile = undefined;
+    } else if(this.profileService.initialProfile !== undefined) {
+      user = (await this.profileService.findProfile(this.profileService.initialProfile))!;
+      session.user_id = this.profileService.initialProfile;
+    } else throw new UnauthorizedException(`No User Session is active.`);
+
     if (query) {
-      return this.recipeService.searchRecipes(query);
+      return this.recipeService.searchRecipes(user, query);
     }
-    return this.recipeService.getRecipes();
+    return this.recipeService.getRecipes(user);
   }
 
   @Get(':id')
