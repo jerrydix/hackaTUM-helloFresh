@@ -16,6 +16,14 @@ import { ConfigService } from "@nestjs/config";
     saveUninitialized: false
   }));
 
+  /* potential (temp) fix to CORS */
+  app.enableCors({
+    origin: '*',
+    methods: 'POST, PUT, DELETE, GET, OPTIONS',
+    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    maxAge: 1728000
+  });
+
   const config = new DocumentBuilder()
     .setTitle('HellOrange')
     .setDescription('A Culinary API')
