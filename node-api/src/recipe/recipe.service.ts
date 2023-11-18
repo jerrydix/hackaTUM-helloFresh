@@ -30,7 +30,20 @@ export class RecipeService implements OnModuleInit {
   async getRecipes() {
     return this.prisma.recipe.findMany({
       include: {
-        ingredients: true
+        ingredients: true,
+        utensils: true
+      }
+    });
+  }
+
+  async searchRecipes(term: string) {
+    return this.prisma.recipe.findMany({
+      where: {
+        OR: [
+          { title: { contains: term } },
+          { description: { contains: term } },
+          { ingredients: { some: { ingredientType: { contains: term } } } }
+        ]
       }
     });
   }

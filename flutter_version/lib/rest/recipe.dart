@@ -1,36 +1,82 @@
 
+import 'dart:collection';
+
+import 'package:flutter_version/rest/utensil.dart';
+
+import 'ingredient.dart';
+
 class Recipe {
+  final int id;
   final String name;
   final String imagePath;
-  final String abstract;
   final String description;
-  final DateTime time;
-  final List<String> ingredients;
+  final int time;
+  final String difficulty;
   final List<String> steps;
+  final int calories;
+  final int proteins;
+  final int carbs;
+  final int fats;
+  final int fiber;
+  final Map<String, String> vitamins;
+  final Map<String, String> minerals;
+  final List<dynamic> allergyBits;
+  final List<Ingredient> ingredients;
   late String timeString;
-  //final List<String> tags,
+
 
   Recipe({
     required this.name,
     required this.imagePath,
-    required this.abstract,
     required this.description,
-    required this.time,
-    required this.ingredients,
     required this.steps,
-    //required this.tags,
+    required this.ingredients,
+    required this.difficulty,
+    required this.calories,
+    required this.proteins,
+    required this.carbs,
+    required this.fats,
+    required this.fiber,
+    required this.vitamins,
+    required this.minerals,
+    required this.allergyBits,
+    required this.id,
+    required this.time
   }) {
-    if (time.hour == 0) {
-      timeString = '${time.minute} min';
-    } else {
-      timeString = '${time.hour}:${time.minute} h';
-    }
+    timeString = '$time min';
   }
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
-    return Recipe(name: 'Chicken Soup', imagePath: 'assets/Orange.png', abstract: 'This is a recipe for chicken soup', description: 'This is a recipe for chicken soup', time: DateTime.now(), ingredients: ['Chicken', 'Soup'], steps: ['Cook', 'Eat'],
-      //name: json['label'] as String,
-      //imagePath: json['image'] as String,
+    String stepsString = json['instructions'] as String;
+    List<String> stepList = stepsString.split('\n');
+    List<Ingredient> ingredientList = [];
+    List<Utensil> utensilList = [];
+
+    for (int i = 0; i < json["ingredients"].length; i++) {
+      ingredientList.add(Ingredient.fromJson(json["ingredients"][i]));
+    }
+
+    for (int i = 0; i < json["utensils"].length; i++) {
+      utensilList.add(Utensil.fromJson(json["utensils"][i]));
+    }
+
+    return Recipe(
+      id: json['id'] as int,
+      name: json['title'] as String,
+      imagePath: json['imgUrl'] as String,
+      description: json['description'] as String,
+      time: json['duration'] as int,
+      difficulty: json['difficulty'] as String,
+      steps: stepList,
+      calories: json['caloriesPerUnit'] as int,
+      proteins: json['proteinsPerUnit'] as int,
+      carbs: json['carbsPerUnit'] as int,
+      fats: json['fatsPerUnit'] as int,
+      fiber: json['fiberPerUnit'] as int,
+      vitamins: Map.from(json['vitamins']),
+      minerals: Map.from(json['minerals']),
+      allergyBits: json['allergyBits']['data'] as List<dynamic>,
+      ingredients: ingredientList,
       );
   }
 }

@@ -3,17 +3,33 @@ import 'dart:ui';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:blur/blur.dart';
+import 'package:flutter_version/RecipeManager.dart';
 import 'package:flutter_version/pages/recipe_page.dart';
-
 
 import '../rest/recipe.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   final Recipe recipe;
-  const RecipeCard({
-    super.key,
-    required this.recipe,
-  });
+  bool isFavourite;
+
+  RecipeCard({super.key, required this.recipe, required this.isFavourite});
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+
+  Icon currentHeartIcon = const Icon(Icons.favorite_border);
+
+  @override
+  void initState() {
+    if (widget.isFavourite) {
+      currentHeartIcon = const Icon(Icons.favorite, color: Colors.red,);
+    }
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,82 +47,134 @@ class RecipeCard extends StatelessWidget {
         ),
         closedBuilder: (context, action) {
           return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Stack(
-                    fit: StackFit.passthrough,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                        ),
-                        child: Image.asset(recipe.imagePath, fit: BoxFit.cover),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 180,
+                child: Stack(
+                  fit: StackFit.passthrough,
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        topRight: Radius.circular(8),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(height: 132,),
-                          Text( //todo fix alignment
-                            recipe.name,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ).frosted(
-                            blur: 8,
-                            padding: EdgeInsets.all(8),
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IntrinsicHeight(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
-                            child: Text(
-                              recipe.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          VerticalDivider(
-                            color: Theme.of(context).dividerColor,
-                            thickness: 2,
-                          ),
-                          SizedBox(
-                            width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.schedule),
-                                SizedBox(width: 3,),
-                                Text(
-                                  recipe.timeString,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
+                      child: Image.network(widget.recipe.imagePath, fit: BoxFit.cover),
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.secondaryContainer,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                              ],
+                                child: IconButton(
+                                    constraints: const BoxConstraints(
+                                      maxWidth: 40,
+                                      maxHeight: 40,
+                                    ),
+                                    onPressed: () {
+                                      if (widget.isFavourite) {
+                                        if (RecipeManager.instance.favouriteRecipeCards.contains(widget)) {
+                                          RecipeManager.instance.favouriteRecipeCards.remove(widget);
+                                        }
+                                        RecipeManager.instance.favoritesValue.value--;
+                                        print(RecipeManager.instance.favouriteRecipeCards.length);
+                                        setState(() {
+                                          currentHeartIcon = const Icon(Icons.favorite_border);
+                                          widget.isFavourite = false;
+                                        });
+                                      } else {
+                                        if (!RecipeManager.instance.favouriteRecipeCards.contains(widget)) {
+                                          RecipeManager.instance.favouriteRecipeCards.add(widget);
+                                        }
+                                        RecipeManager.instance.favoritesValue.value++;
+                                        print(RecipeManager.instance.favouriteRecipeCards.length);
+                                        setState(() {
+                                          currentHeartIcon = const Icon(Icons.favorite, color: Colors.red,);
+                                          widget.isFavourite = true;
+                                        });
+                                      }
+                                    },
+                                    icon: currentHeartIcon,
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                                    )
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        SizedBox(height: 76,),
+                        Text( //todo fix alignment
+                          widget.recipe.name,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          overflow: TextOverflow.ellipsis,
+                        ).frosted(
+                          blur: 8,
+                          padding: EdgeInsets.all(8),
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      ],
                     )
+                  ],
                 ),
-              ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
+                          child: Text(
+                            widget.recipe.description,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Theme.of(context).dividerColor,
+                          thickness: 2,
+                        ),
+                        SizedBox(
+                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.schedule),
+                              SizedBox(width: 3,),
+                              Text(
+                                widget.recipe.timeString,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+              ),
+            ],
 
           );
         },
         openBuilder: (context, action) {
-          return RecipePage(recipe: recipe);
+          return RecipePage(recipe: widget.recipe);
         },
       ),
     );

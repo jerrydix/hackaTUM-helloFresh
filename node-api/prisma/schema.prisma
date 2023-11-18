@@ -12,6 +12,9 @@ model Profile {
   id   Int    @id @default(autoincrement())
   name String @unique
 
+  preferences Ingredient[] @relation("liked_by")
+  exclusions  Ingredient[] @relation("disliked_by")
+
   allergyBits Bytes
   orderSize   OrderSize @default(SMALL)
 }
@@ -22,11 +25,18 @@ enum OrderSize {
   LARGE
 }
 
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
 model Recipe {
   id              Int          @id @default(autoincrement())
   title           String
   description     String
   duration        Int
+  difficulty      Difficulty   @default(MEDIUM)
   instructions    String
   utensils        Utensil[]
   ingredients     Ingredient[]
@@ -69,6 +79,9 @@ model Ingredient {
   price          Decimal        @db.Money
   recipes        Recipe[]
   type           IngredientType @relation(fields: [ingredientType], references: [name])
+
+  likedBy    Profile[] @relation("liked_by")
+  dislikedBy Profile[] @relation("disliked_by")
 }
 
 model IngredientType {
