@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_version/rest/Recipe.dart';
 import 'package:flutter_version/widgets/recipe_card.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,8 @@ class RecipeManager {
   List<RecipeCard> favouriteRecipeCards = [];
   List<Recipe> allRecipes = [];
   List<RecipeCard> allRecipeCards = [];
+
+  late ValueNotifier<int> favoritesValue = ValueNotifier(favouriteRecipeCards.length);
 
   RecipeManager._internal();
 

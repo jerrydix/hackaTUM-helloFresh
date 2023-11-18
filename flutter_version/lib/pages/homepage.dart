@@ -42,7 +42,7 @@ class _MyHomePageState extends State<HomePage> {
                   onPressed: () {}, // TODO: implement
                 ),
                 IconButton(
-                  icon: const Icon(Icons.person_outline),
+                  icon: const Icon(Icons.person),
                   onPressed: () {}, // TODO: implement
                 ),
               ],
@@ -50,8 +50,10 @@ class _MyHomePageState extends State<HomePage> {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.favorite_outline),
-              onPressed: () {},
+              icon: const Icon(Icons.favorite),
+              onPressed: () {
+                Navigator.pushNamed(context, '/favorites');
+              },
             ),
             const Padding(padding: EdgeInsets.only(right: 10)),
           ],
@@ -64,7 +66,6 @@ class _MyHomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: SearchBar(
                     elevation: MaterialStateProperty.all(5),
-
                     hintText: 'Search for recipes...',
                     onChanged: (value) {},
                     leading: const Row(
@@ -125,7 +126,8 @@ class _MyHomePageState extends State<HomePage> {
                               time: DateTime.now(),
                               ingredients: ['Chicken', 'Soup'],
                               steps: ['Cook', 'Eat'],
-                          )
+                          ),
+                        isFavourite: false,
                       ),
                     ],
                   ),

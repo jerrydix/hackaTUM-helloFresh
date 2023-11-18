@@ -29,7 +29,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
             padding: const EdgeInsets.only(top: 12, bottom: 12),
             child: SearchBar(
                 elevation: MaterialStateProperty.all(5),
-
                 hintText: 'Search for recipes...',
                 onChanged: (value) {},
                 leading: const Row(
@@ -79,8 +78,18 @@ class _FavouritesPageState extends State<FavouritesPage> {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: recipeManager.favouriteRecipeCards,
+            child: ValueListenableBuilder<int>(
+              valueListenable: RecipeManager.instance.favoritesValue,
+              builder: (BuildContext context, int value, child ) {
+                print("TATETSTS");
+              return ListView(
+                children: [
+                  for (var recipeCard in RecipeManager.instance.favouriteRecipeCards)
+                    recipeCard,
+                ],
+              );
+            }
+
             ),
           ),
         ],
