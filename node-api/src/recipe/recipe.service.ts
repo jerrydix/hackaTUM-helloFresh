@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { PrismaService } from '@/prisma.service';
-import { IngredientCategory } from '@prisma/client';
+import { IngredientCategory } from '#/index';
 import { Prisma } from "#/index";
 
 import Decimal = Prisma.Decimal;
