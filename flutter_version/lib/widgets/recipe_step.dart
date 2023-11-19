@@ -21,7 +21,7 @@ class _recipe_stepState extends State<recipe_step> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 20),
+        padding: const EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 20),
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minHeight: 120.0,
@@ -35,7 +35,7 @@ class _recipe_stepState extends State<recipe_step> {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],),
           child: Row(
@@ -60,7 +60,7 @@ class _recipe_stepState extends State<recipe_step> {
                   padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 25),
                   child: SingleChildScrollView(
                       child:
-                        Text("${widget.content}"),
+                        Text(widget.content),
                       ),
                     ),
                   ),

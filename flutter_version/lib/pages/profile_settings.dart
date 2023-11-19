@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_version/RecipeManager.dart';
 import 'package:flutter_version/widgets/toggle_ingredientType.dart';
@@ -24,9 +23,9 @@ class _ProfileSettingsState extends State<ProfileSettingsPage> {
           child: Center(
               child: Column(
                 children: [
-                  Icon(Icons.person, size: 100),
+                  const Icon(Icons.person, size: 100),
                   Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child:
                     Text("Jonas", style: Theme.of(context).textTheme.headlineMedium),),
                   Padding(
@@ -48,7 +47,7 @@ class _ProfileSettingsState extends State<ProfileSettingsPage> {
                   ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
-              child: Divider()),
+              child: const Divider()),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 7, horizontal: MediaQuery.of(context).size.width * 1 / 10),
                     child: Text("Select dietary restrictions",

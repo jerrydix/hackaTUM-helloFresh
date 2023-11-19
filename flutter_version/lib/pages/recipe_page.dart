@@ -1,14 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_version/rest/ingredient.dart';
 import 'package:flutter_version/widgets/recipe_step.dart';
 import 'package:flutter_version/widgets/table_widget.dart';
 import 'package:flutter_version/widgets/table_nutrients.dart';
 
 import 'package:flutter_version/widgets/tag.dart';
 import '../rest/recipe.dart';
-import 'dart:collection';
 
 class RecipePage extends StatefulWidget {
   const RecipePage({super.key, required this.recipe});
@@ -33,7 +31,7 @@ class _RecipePageState extends State<RecipePage> {
               child: Text(widget.recipe.name,
                   style: Theme.of(context).textTheme.headlineMedium),
             ),
-            Icon(Icons.schedule),
+            const Icon(Icons.schedule),
             //Text(widget.recipe.time.toString() + " min", style: Theme.of(context).textTheme.headlineMedium),
             Text(" ${widget.recipe.time} min", style: Theme.of(context).textTheme.headlineSmall)
           ],
@@ -52,7 +50,7 @@ class _RecipePageState extends State<RecipePage> {
                       left: MediaQuery.of(context).size.width * 1 / 10),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
-                    child: Image.network("${widget.recipe.imagePath}",
+                    child: Image.network(widget.recipe.imagePath,
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -166,9 +164,9 @@ class _RecipePageState extends State<RecipePage> {
       "Celery"
     ];
     List<String> allergy =[];
-    final _random = new Random();
+    final random = Random();
     for (int i = 0; i < 3; i++){
-      var element = allAllergyStrings[_random.nextInt(allAllergyStrings.length)];
+      var element = allAllergyStrings[random.nextInt(allAllergyStrings.length)];
       if(!allergy.contains(element)){
         allergy.add(element);
       }
@@ -209,25 +207,25 @@ class _RecipePageState extends State<RecipePage> {
       }
     }
     if(kids){
-      tags.add(tag(content: 'kids', color: Colors.red));
+      tags.add(const tag(content: 'kids', color: Colors.red));
     }
     if(vegan){
-      tags.add(tag(content: 'vegan', color: Colors.green));
+      tags.add(const tag(content: 'vegan', color: Colors.green));
     }
     if(veget){
-      tags.add(tag(content: 'vegeterian', color: Colors.green));
+      tags.add(const tag(content: 'vegeterian', color: Colors.green));
     }
     if(widget.recipe.calories < 650){
-      tags.add(tag(content: 'less 650', color: Colors.grey));
+      tags.add(const tag(content: 'less 650', color: Colors.grey));
     }
     if(widget.recipe.proteins > 30){
-      tags.add(tag(content: 'high protein', color: Colors.yellow));
+      tags.add(const tag(content: 'high protein', color: Colors.yellow));
     }
     if(widget.recipe.time == 10){
-      tags.add(tag(content: '10 min', color: Colors.blue));
+      tags.add(const tag(content: '10 min', color: Colors.blue));
     }
     if(widget.recipe.time < 30){
-      tags.add(tag(content: 'less 30', color: Colors.orange));
+      tags.add(const tag(content: 'less 30', color: Colors.orange));
     }
     return tags;
   }

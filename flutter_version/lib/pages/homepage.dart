@@ -1,12 +1,9 @@
 import 'dart:convert';
-import 'dart:html';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_version/rest/recipe.dart';
 import 'package:flutter_version/widgets/recipe_card.dart';
 import 'package:flutter_version/widgets/toggles.dart';
-import 'package:file_saver/file_saver.dart';
 import 'package:file_picker/file_picker.dart';
 
 import '../RecipeManager.dart';
@@ -156,8 +153,8 @@ class _MyHomePageState extends State<HomePage> {
                               ),
                               clipBehavior: Clip.antiAlias,
                               child: ExpansionTile(
-                                shape: Border(),
-                                title: Text("Filter ingredients"),
+                                shape: const Border(),
+                                title: const Text("Filter ingredients"),
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
@@ -187,7 +184,7 @@ class _MyHomePageState extends State<HomePage> {
                                               alignment: Alignment.center,
                                               child: Padding(
                                                 padding:
-                                                EdgeInsets.only(top: 5, bottom: 10),
+                                                const EdgeInsets.only(top: 5, bottom: 10),
                                                 child: ElevatedButton(
                                                   onPressed: () {
                                                     setState(() {
@@ -206,7 +203,7 @@ class _MyHomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          Padding(padding: EdgeInsets.only(top: 5)),
+                          const Padding(padding: EdgeInsets.only(top: 5)),
                           Expanded(
                             child: ValueListenableBuilder<int>(
                                 valueListenable: RecipeManager.instance.favoritesValue,
@@ -272,7 +269,7 @@ class _MyHomePageState extends State<HomePage> {
                             children: [
                               IconButton(onPressed: () {
                                 createFCS();
-                              }, icon: Icon(Icons.download, size: 50,)),
+                              }, icon: const Icon(Icons.download, size: 50,)),
                               IconButton(onPressed: () async {
                                 var picked = await FilePicker.platform.pickFiles();
 
@@ -285,7 +282,7 @@ class _MyHomePageState extends State<HomePage> {
                                   setFromJson(data);
                                   print(data);
                                 }
-                              }, icon: Icon(Icons.upload_file, size: 50,))
+                              }, icon: const Icon(Icons.upload_file, size: 50,))
 
                             ],
                           )
@@ -368,7 +365,7 @@ class _MyHomePageState extends State<HomePage> {
     int prot() => protController.text != "" ? int.parse(protController.text) : 0;
     int prots = prot();
 
-    final Uri url = Uri.parse('http://144.126.143.118:3000/profile/data?calories=${cals}&fats=${fats}&carbs=${carbs}&proteins=${prots}');
+    final Uri url = Uri.parse('http://144.126.143.118:3000/profile/data?calories=$cals&fats=$fats&carbs=$carbs&proteins=$prots');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }

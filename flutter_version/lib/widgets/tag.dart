@@ -13,7 +13,7 @@ class _tagState extends State<tag> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minHeight: 25.0,
@@ -30,7 +30,7 @@ class _tagState extends State<tag> {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_version/pages/favourites_page.dart';
 import 'package:flutter_version/pages/homepage.dart';
 import 'package:flutter_version/pages/intro_page.dart';
-import 'package:flutter_version/pages/landing_page.dart';
 import 'package:flutter_version/pages/profile_settings.dart';
 import 'package:google_fonts/google_fonts.dart';
 

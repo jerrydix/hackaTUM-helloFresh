@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_version/RecipeManager.dart';
 
-import 'package:flutter_version/rest/recipe.dart';
-import 'package:flutter_version/widgets/recipe_card.dart';
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({super.key});

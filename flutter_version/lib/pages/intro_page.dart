@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_version/pages/landing_page.dart';
 
 class IntroPage extends StatefulWidget {
-  const IntroPage({Key? key}) : super(key: key);
+  const IntroPage({super.key});
 
   @override
   State<IntroPage> createState() => _IntroPageState();

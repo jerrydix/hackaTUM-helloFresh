@@ -113,14 +113,14 @@ class _RecipeCardState extends State<RecipeCard> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 76,),
+                        const SizedBox(height: 76,),
                         Text( //todo fix alignment
                           widget.recipe.name,
                           style: Theme.of(context).textTheme.headlineSmall,
                           overflow: TextOverflow.ellipsis,
                         ).frosted(
                           blur: 8,
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           width: MediaQuery.of(context).size.width,
                         ),
                       ],
@@ -154,8 +154,8 @@ class _RecipeCardState extends State<RecipeCard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.schedule),
-                              SizedBox(width: 3,),
+                              const Icon(Icons.schedule),
+                              const SizedBox(width: 3,),
                               Text(
                                 widget.recipe.timeString,
                                 style: const TextStyle(

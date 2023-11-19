@@ -14,7 +14,7 @@ class _toggleProductState extends State<toggleProduct> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
+        padding: const EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
         child: ToggleButtons(
       isSelected: [widget.enabled],
       onPressed: (index) {

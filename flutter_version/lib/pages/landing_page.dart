@@ -67,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 20),
+                Padding(padding: const EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(const Size(200, 100)),

@@ -20,9 +20,9 @@ class _toggleProductState extends State<toggleIngredient> {
   void initState() {
     choice = widget.value;
     switch (choice) {
-      case 0: currentColor = Colors.redAccent!;
+      case 0: currentColor = Colors.redAccent;
       break;
-      case 1: currentColor = Colors.white!;
+      case 1: currentColor = Colors.white;
       break;
       case 3: currentColor =  Colors.green[400]!;
     }
@@ -33,12 +33,12 @@ class _toggleProductState extends State<toggleIngredient> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(right: 5, left: 5, top: 5, bottom: 5),
       child: Card(
         elevation: 3,
         color: currentColor,
         child: Padding(
-            padding: EdgeInsets.only(right: 5, left: 5, top: 5),
+            padding: const EdgeInsets.only(right: 5, left: 5, top: 5),
             child: SizedBox(
               width: 160,
               height: 80,
@@ -49,7 +49,7 @@ class _toggleProductState extends State<toggleIngredient> {
                         .of(context)
                         .textTheme
                         .bodyMedium, textAlign: TextAlign.center,),
-                    Padding(padding: EdgeInsets.only(bottom: 5),
+                    Padding(padding: const EdgeInsets.only(bottom: 5),
                       child: SegmentedButton<int>(
                         style: ButtonStyle(shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(borderRadius: BorderRadius
@@ -87,7 +87,7 @@ class _toggleProductState extends State<toggleIngredient> {
                           }
                           RecipeManager.instance.ingredientTypesNotSelected.add(widget.title);
                           break;
-                          case 1: color = Colors.white!;
+                          case 1: color = Colors.white;
                           bool inFirst = false;
                           for (var e in RecipeManager.instance.ingredientTypesNotSelected) {
                             if (e == widget.title) {
