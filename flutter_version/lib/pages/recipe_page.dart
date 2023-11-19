@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_version/rest/ingredient.dart';
 import 'package:flutter_version/widgets/recipe_step.dart';
@@ -128,7 +130,13 @@ class _RecipePageState extends State<RecipePage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 1 / 20),
-                  child: Text('Allergens', style: Theme.of(context).textTheme.headlineMedium),)
+                  child: Text('Allergens', style: Theme.of(context).textTheme.headlineMedium),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(getAllergy(), style: Theme.of(context).textTheme.headlineSmall),
+                  ],
+                ),
               ],
             ),
           ),
@@ -138,6 +146,34 @@ class _RecipePageState extends State<RecipePage> {
   }
   List<recipe_step> genList(){
     return List<recipe_step>.generate(widget.recipe.steps.length, (int index) => recipe_step(number: index + 1, content: widget.recipe.steps[index], color: Colors.green));
+  }
+
+  String getAllergy(){
+    List<String> allAllergyStrings = [
+      "Soya",
+      "Sulphur Dioxide",
+      "Sesame Seeds",
+      "Peanuts",
+      "Nuts",
+      "Mustard",
+      "Molluscs",
+      "Milk",
+      "Lupin",
+      "Fish",
+      "Eggs",
+      "Crustaceans",
+      "Gluten",
+      "Celery"
+    ];
+    List<String> allergy =[];
+    final _random = new Random();
+    for (int i = 0; i < 3; i++){
+      var element = allAllergyStrings[_random.nextInt(allAllergyStrings.length)];
+      if(!allergy.contains(element)){
+        allergy.add(element);
+      }
+    }
+    return allergy.join(', ');
   }
 
   List<tag> genTagList(){
@@ -195,5 +231,6 @@ class _RecipePageState extends State<RecipePage> {
     }
     return tags;
   }
+
 }
 

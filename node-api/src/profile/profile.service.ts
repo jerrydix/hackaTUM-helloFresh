@@ -162,4 +162,24 @@ export class ProfileService implements OnModuleInit {
     }
     return null;
   }
+
+  async genFile(calories: number, fats: number, carbs: number, proteins: number, recipes: Array<number>, exclusions: Array<string>) {
+    return Buffer.from(JSON.stringify({
+      calories, fats, carbs, proteins, recipes, exclusions
+    }, null, 2));
+  }
+
+  async getRandomRecipeIDs(count: number) {
+    return (await this.prisma.recipe.findMany({
+      take: count,
+      select: { id: true }
+    })).map(r => r.id);
+  }
+
+  async getRandomExclusions(count: number) {
+    return (await this.prisma.ingredientType.findMany({
+      take: count,
+      select: { category: true }
+    })).map(i => i.category);
+  }
 }
