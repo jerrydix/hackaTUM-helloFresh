@@ -1,0 +1,255 @@
+[gd_scene load_steps=23 format=3 uid="uid://i7nw3ly4cfm3"]
+
+[ext_resource type="Texture2D" uid="uid://du77hnhj1r8yt" path="res://Icons/whiteTexture.jpg" id="1_8h8pb"]
+[ext_resource type="Script" path="res://Scenes/Loader.gd" id="1_77vla"]
+[ext_resource type="Texture2D" uid="uid://d1ph8roj2tjbr" path="res://Icons/person_FILL0_wght400_GRAD0_opsz24.svg" id="2_tiaej"]
+[ext_resource type="Texture2D" uid="uid://cigpfgyvk7qde" path="res://Icons/exercise_FILL0_wght400_GRAD0_opsz24.svg" id="3_3g5i6"]
+[ext_resource type="Texture2D" uid="uid://byamyfutws1dw" path="res://Icons/OrangeFinal.png" id="5_kbg4p"]
+[ext_resource type="Texture2D" uid="uid://cixywnmyqck7k" path="res://Icons/shopping_cart_FILL0_wght400_GRAD0_opsz24.svg" id="5_ylqqs"]
+[ext_resource type="Texture2D" uid="uid://cyfyywjs0dcuo" path="res://Icons/favorite_FILL0_wght400_GRAD0_opsz24.svg" id="6_iuynu"]
+[ext_resource type="Texture2D" uid="uid://cj1b3rvr01ns" path="res://Icons/dinner_dining_FILL0_wght400_GRAD0_opsz24.svg" id="7_c64g6"]
+[ext_resource type="ButtonGroup" uid="uid://dk4ubib21havi" path="res://Groups/TabButtonGroup.tres" id="7_wh1jd"]
+[ext_resource type="Texture2D" uid="uid://kic53kspr1p2" path="res://Icons/local_shipping_FILL0_wght400_GRAD0_opsz24.svg" id="8_bjax2"]
+[ext_resource type="Texture2D" uid="uid://b6vt80yx4ymbk" path="res://Icons/kitchen_FILL0_wght400_GRAD0_opsz24.svg" id="9_51rkw"]
+[ext_resource type="Script" path="res://Scenes/ButtonPressed.gd" id="9_dd7p8"]
+[ext_resource type="Script" path="res://Scenes/TabController.gd" id="10_c54i0"]
+[ext_resource type="Texture2D" uid="uid://by1bsk2rd32oo" path="res://Icons/search_FILL0_wght400_GRAD0_opsz24.svg" id="13_x3qkq"]
+[ext_resource type="PackedScene" uid="uid://ccjjls46lt3um" path="res://Scenes/fridge.tscn" id="14_1ts8v"]
+[ext_resource type="Script" path="res://Scenes/HttpController.gd" id="15_bdujn"]
+
+[sub_resource type="Gradient" id="Gradient_5ek6y"]
+offsets = PackedFloat32Array(0, 0.779279, 0.972973)
+colors = PackedColorArray(0, 0, 0, 1, 0.207843, 0.466667, 0.219608, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0by56"]
+frequency = 0.0462
+fractal_type = 3
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_36lc8"]
+color_ramp = SubResource("Gradient_5ek6y")
+noise = SubResource("FastNoiseLite_0by56")
+
+[sub_resource type="SystemFont" id="SystemFont_t77yp"]
+
+[sub_resource type="FontVariation" id="FontVariation_v3gv1"]
+base_font = SubResource("SystemFont_t77yp")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nyw7"]
+bg_color = Color(1, 1, 1, 1)
+shadow_color = Color(0, 0, 0, 0.564706)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_77vla")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8h8pb")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.02
+anchor_right = 0.97
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpperBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ProfileButton" type="TextureButton" parent="VBoxContainer/UpperBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_tiaej")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="FitnessButton" type="TextureButton" parent="VBoxContainer/UpperBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 2
+texture_normal = ExtResource("3_3g5i6")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/UpperBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.11
+texture = ExtResource("5_kbg4p")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ShoppingCartButton" type="TextureButton" parent="VBoxContainer/UpperBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 10
+texture_normal = ExtResource("5_ylqqs")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="FavouritesButton" type="TextureButton" parent="VBoxContainer/UpperBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+toggle_mode = true
+texture_normal = ExtResource("6_iuynu")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("9_dd7p8")
+
+[node name="Categories" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+
+[node name="DinnerCategory" type="TextureButton" parent="VBoxContainer/Categories" groups=["Tabs"]]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+button_group = ExtResource("7_wh1jd")
+texture_normal = ExtResource("7_c64g6")
+texture_pressed = ExtResource("7_c64g6")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("9_dd7p8")
+
+[node name="DeliveryCategory" type="TextureButton" parent="VBoxContainer/Categories" groups=["Tabs"]]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+button_group = ExtResource("7_wh1jd")
+texture_normal = ExtResource("8_bjax2")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("9_dd7p8")
+
+[node name="InFridgeCategory" type="TextureButton" parent="VBoxContainer/Categories" groups=["Tabs"]]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+button_group = ExtResource("7_wh1jd")
+texture_normal = ExtResource("9_51rkw")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("9_dd7p8")
+
+[node name="LineSeparator" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 14.325)
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_36lc8")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="SearchBar" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SearchBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("13_x3qkq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SearchText" type="TextEdit" parent="VBoxContainer/SearchBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/background_color = Color(0.909804, 0.909804, 0.909804, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.254902)
+theme_override_constants/outline_size = 0
+theme_override_constants/caret_width = 0
+theme_override_fonts/font = SubResource("FontVariation_v3gv1")
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Search for recipes..."
+
+[node name="Tabs" type="TabContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3nyw7")
+tab_alignment = 1
+tabs_visible = false
+script = ExtResource("10_c54i0")
+
+[node name="RecipesDining" type="ScrollContainer" parent="VBoxContainer/Tabs"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DiningVBox" type="VBoxContainer" parent="VBoxContainer/Tabs/RecipesDining"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecipesDelivery" type="ScrollContainer" parent="VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DeliveryVBox" type="VBoxContainer" parent="VBoxContainer/Tabs/RecipesDelivery"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RecipesFridge" type="ScrollContainer" parent="VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FridgeVBox" type="VBoxContainer" parent="VBoxContainer/Tabs/RecipesFridge"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Fridge" parent="VBoxContainer/Tabs/RecipesFridge/FridgeVBox" instance=ExtResource("14_1ts8v")]
+custom_minimum_size = Vector2(256, 358.655)
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="RecipesFavourite" type="ScrollContainer" parent="VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FavouriteVBox" type="VBoxContainer" parent="VBoxContainer/Tabs/RecipesFavourite"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HttpController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_bdujn")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HttpController"]
+use_threads = true
+
+[connection signal="pressed" from="VBoxContainer/UpperBar/FavouritesButton" to="VBoxContainer/Tabs" method="_on_favourites_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Categories/DinnerCategory" to="VBoxContainer/Tabs" method="_on_dinner_category_pressed"]
+[connection signal="toggled" from="VBoxContainer/Categories/DinnerCategory" to="VBoxContainer/Categories/DinnerCategory" method="_on_toggled"]
+[connection signal="pressed" from="VBoxContainer/Categories/DeliveryCategory" to="VBoxContainer/Tabs" method="_on_delivery_category_pressed"]
+[connection signal="toggled" from="VBoxContainer/Categories/DeliveryCategory" to="VBoxContainer/Categories/DeliveryCategory" method="_on_toggled"]
+[connection signal="pressed" from="VBoxContainer/Categories/InFridgeCategory" to="VBoxContainer/Tabs" method="_on_in_fridge_category_pressed"]
+[connection signal="toggled" from="VBoxContainer/Categories/InFridgeCategory" to="VBoxContainer/Categories/InFridgeCategory" method="_on_toggled"]
+[connection signal="text_changed" from="VBoxContainer/SearchBar/SearchText" to="VBoxContainer/Tabs" method="_on_search_text_text_changed"]
+
+[editable path="VBoxContainer/Tabs/RecipesFridge/FridgeVBox/Fridge"]

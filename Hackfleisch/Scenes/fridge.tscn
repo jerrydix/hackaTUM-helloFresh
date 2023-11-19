@@ -1,0 +1,206 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccjjls46lt3um"]
+
+[ext_resource type="Texture2D" uid="uid://gvorpbecqa0i" path="res://Icons/avocado.png" id="1_ajw3y"]
+[ext_resource type="Script" path="res://Scenes/fridge.gd" id="1_e2fl3"]
+[ext_resource type="Script" path="res://Scenes/ButtonPressed.gd" id="3_0uo1b"]
+[ext_resource type="Texture2D" uid="uid://dxlhkkn6q6cok" path="res://Icons/carrot.png" id="3_5iaog"]
+[ext_resource type="Texture2D" uid="uid://c2xnpxwenym6o" path="res://Icons/icons8-tomato-100.png" id="3_7q1ih"]
+[ext_resource type="Texture2D" uid="uid://cb6g2cyuljfq0" path="res://Icons/cheese.png" id="4_agocw"]
+[ext_resource type="Texture2D" uid="uid://cr2t0sntgyues" path="res://Icons/egg.png" id="5_4sflx"]
+[ext_resource type="Texture2D" uid="uid://b3gkx7xx82jju" path="res://Icons/flour (1).png" id="6_r8dvf"]
+[ext_resource type="Texture2D" uid="uid://bqwj0kyxrag0s" path="res://Icons/icons8-lemon-100.png" id="7_ng75w"]
+[ext_resource type="Texture2D" uid="uid://c77dilab0i1ia" path="res://Icons/meat.png" id="8_a8jgg"]
+[ext_resource type="Texture2D" uid="uid://drpnfjb3883ml" path="res://Icons/milk-bottle.png" id="9_tx2mh"]
+[ext_resource type="Texture2D" uid="uid://cap23vimng8oj" path="res://Icons/potato.png" id="10_eaheh"]
+[ext_resource type="Texture2D" uid="uid://de3pkx75f0w7y" path="res://Icons/icons8-garlic-100.png" id="12_06od4"]
+[ext_resource type="Texture2D" uid="uid://bul8w0hnv8t2n" path="res://Icons/icons8-butter-100.png" id="13_fgv8t"]
+
+[node name="Fridge" type="Control"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+script = ExtResource("1_e2fl3")
+
+[node name="FlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="avocado" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("1_ajw3y")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="tomato" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("3_7q1ih")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="meat" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("8_a8jgg")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="egg" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("5_4sflx")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="carrot" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("3_5iaog")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="cheese" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("4_agocw")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="flour" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("6_r8dvf")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="citrus" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("7_ng75w")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="milk" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("9_tx2mh")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="potato" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("10_eaheh")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="garlic" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("12_06od4")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[node name="butter" type="TextureButton" parent="FlowContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 1
+toggle_mode = true
+texture_normal = ExtResource("13_fgv8t")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_0uo1b")
+
+[connection signal="toggled" from="FlowContainer/avocado" to="." method="_on_avocado_toggled"]
+[connection signal="toggled" from="FlowContainer/avocado" to="FlowContainer/avocado" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/tomato" to="." method="_on_tomato_toggled"]
+[connection signal="toggled" from="FlowContainer/tomato" to="FlowContainer/tomato" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/meat" to="." method="_on_meat_toggled"]
+[connection signal="toggled" from="FlowContainer/meat" to="FlowContainer/meat" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/egg" to="." method="_on_egg_toggled"]
+[connection signal="toggled" from="FlowContainer/egg" to="FlowContainer/egg" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/carrot" to="." method="_on_carrot_toggled"]
+[connection signal="toggled" from="FlowContainer/carrot" to="FlowContainer/carrot" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/cheese" to="." method="_on_cheese_toggled"]
+[connection signal="toggled" from="FlowContainer/cheese" to="FlowContainer/cheese" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/flour" to="." method="_on_flour_toggled"]
+[connection signal="toggled" from="FlowContainer/flour" to="FlowContainer/flour" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/citrus" to="." method="_on_citrus_toggled"]
+[connection signal="toggled" from="FlowContainer/citrus" to="FlowContainer/citrus" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/milk" to="." method="_on_milk_toggled"]
+[connection signal="toggled" from="FlowContainer/milk" to="FlowContainer/milk" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/potato" to="." method="_on_potato_toggled"]
+[connection signal="toggled" from="FlowContainer/potato" to="FlowContainer/potato" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/garlic" to="." method="_on_garlic_toggled"]
+[connection signal="toggled" from="FlowContainer/garlic" to="FlowContainer/garlic" method="_on_toggled"]
+[connection signal="toggled" from="FlowContainer/butter" to="." method="_on_butter_toggled"]
+[connection signal="toggled" from="FlowContainer/butter" to="FlowContainer/butter" method="_on_toggled"]
