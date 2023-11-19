@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://docf4ahibiote"]
+
+[ext_resource type="Shader" path="res://Scenes/GreenShader.gdshader" id="1_k0c1r"]
+
+[resource]
+shader = ExtResource("1_k0c1r")
+shader_parameter/Green = 0.4

@@ -11,11 +11,30 @@ config_version=5
 [application]
 
 config/name="Hackfleisch"
-run/main_scene="res://interface.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=2400
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+rendering/quality/use_taa=true
 
 [rendering]
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
+textures/default_filters/anisotropic_filtering_level=3
+anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/screen_space_aa=1

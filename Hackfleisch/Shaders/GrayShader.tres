@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://jshebdxq611b"]
+
+[ext_resource type="Shader" path="res://Shaders/GrayShader.gdshader" id="1_qtevo"]
+
+[resource]
+shader = ExtResource("1_qtevo")
+shader_parameter/Green = 0.4

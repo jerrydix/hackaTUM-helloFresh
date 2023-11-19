@@ -1,0 +1,169 @@
+[gd_scene load_steps=15 format=3 uid="uid://de7nma8gkegq8"]
+
+[ext_resource type="Script" path="res://Scenes/recipe_slot.gd" id="1_arviy"]
+[ext_resource type="Texture2D" uid="uid://cigpfgyvk7qde" path="res://Icons/exercise_FILL0_wght400_GRAD0_opsz24.svg" id="2_ltxdq"]
+[ext_resource type="Material" uid="uid://jshebdxq611b" path="res://Shaders/GrayShader.tres" id="3_350rn"]
+[ext_resource type="LabelSettings" uid="uid://imvwkn3asnuc" path="res://Fonts/GreenFont.tres" id="3_plmct"]
+[ext_resource type="Texture2D" uid="uid://djfqt8x3lmguo" path="res://Icons/chicken-soup-one-dish-kitchen-square-1200.jpg" id="3_wtthw"]
+[ext_resource type="Texture2D" uid="uid://bumx0xlg25xwk" path="res://Icons/schedule_FILL0_wght400_GRAD0_opsz24.svg" id="5_7a67u"]
+[ext_resource type="Script" path="res://Scenes/HttpController.gd" id="5_ft58c"]
+[ext_resource type="Texture2D" uid="uid://cyfyywjs0dcuo" path="res://Icons/favorite_FILL0_wght400_GRAD0_opsz24.svg" id="6_ynnm0"]
+[ext_resource type="Script" path="res://Scenes/ButtonPressed.gd" id="7_kikpj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hafer"]
+font_size = 53
+font_color = Color(0, 0.698039, 0.0823529, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.137255)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h47xj"]
+font_size = 43
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.137255)
+
+[sub_resource type="Gradient" id="Gradient_mymkh"]
+offsets = PackedFloat32Array(0, 0.779279, 0.972973)
+colors = PackedColorArray(0, 0, 0, 1, 0.207843, 0.466667, 0.219608, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pddce"]
+frequency = 0.0462
+fractal_type = 3
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bn7yq"]
+color_ramp = SubResource("Gradient_mymkh")
+noise = SubResource("FastNoiseLite_pddce")
+
+[node name="RecipeSlot" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 706.015)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_arviy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 634.0
+grow_horizontal = 2
+
+[node name="Image" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="VBoxContainer/Image"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_wtthw")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Image/Image"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="FitnessLabel" type="TextureRect" parent="VBoxContainer/Image/Image/HBoxContainer"]
+material = ExtResource("3_350rn")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_ltxdq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Difficulty" type="Label" parent="VBoxContainer/Image/Image/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+text = "Easy"
+label_settings = ExtResource("3_plmct")
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/Image/Image/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("6_ynnm0")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("7_kikpj")
+
+[node name="Name" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Name"]
+layout_mode = 2
+text = "Chicken soup"
+label_settings = SubResource("LabelSettings_hafer")
+
+[node name="Details" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Wonderful chicken soup for lonely people "
+label_settings = SubResource("LabelSettings_h47xj")
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Details"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_7a67u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Duration" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "2:40"
+label_settings = SubResource("LabelSettings_h47xj")
+
+[node name="LineSeparator" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("NoiseTexture2D_bn7yq")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HttpController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_ft58c")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="HttpController"]
+use_threads = true
+
+[connection signal="toggled" from="VBoxContainer/Image/Image/HBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
