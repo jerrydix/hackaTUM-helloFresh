@@ -42,6 +42,8 @@ dependencies:
   animations: ^2.0.8
   flutter_tts: ^3.8.3
   b: ^0.1.2
+  drag_and_drop_lists: ^0.3.3
+  boardview: ^0.2.2
 
 dev_dependencies:
   flutter_test:
