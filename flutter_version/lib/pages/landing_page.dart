@@ -95,7 +95,7 @@ class _LandingPageState extends State<LandingPage> {
 
     List<Widget> createAllergyTiles() {
       List<Widget> tiles = [];
-      for (var allergy in RecipeManager.instance.allAllergyStrings) {
+      for (int i = 0; i < RecipeManager.instance.allAllergyStrings.length; i++) {
         tiles.add(
           Container(
             alignment: Alignment.center,
@@ -105,12 +105,14 @@ class _LandingPageState extends State<LandingPage> {
                 borderRadius: BorderRadius.circular(10),
               ),
               checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-              title: Text(allergy),
-              value: false,
+              title: Text(RecipeManager.instance.allAllergyStrings[i]),
+              value: RecipeManager.instance.allAllergies[i],
               onChanged: (newValue) {
                 setState(() {
-                  //TODO
+                  RecipeManager.instance.allAllergies[i] = newValue!;
                 });
+                print(RecipeManager.instance.allAllergies);
+                print(RecipeManager.instance.allAllergyStrings);
               },
               controlAffinity: ListTileControlAffinity.leading,
             ),

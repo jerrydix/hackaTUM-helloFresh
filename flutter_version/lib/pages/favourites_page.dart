@@ -21,7 +21,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
       appBar: AppBar(
         title: const Text("Favourite Recipes"),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [

@@ -19,11 +19,9 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   final bodyPadding = 24.0;
-  bool AIenabled = false;
   RecipeManager manager = RecipeManager.instance;
   TextEditingController controller = TextEditingController();
-  List<String> selected =[];
-  TextEditingController controllerHolodilnik = TextEditingController();
+  List<String> selected = [];
 
   TextEditingController calController = TextEditingController();
   TextEditingController fatController = TextEditingController();
@@ -32,18 +30,16 @@ class _MyHomePageState extends State<HomePage> {
 
 
   List<RecipeCard> recipeCards = RecipeManager.instance.allRecipeCards;
-  List<RecipeCard> recipeCardsHolodilnik = RecipeManager.instance.allRecipeCards;
 
   @override
   void initState() {
-    manager.dataFuture = manager.fetchRecipes();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-        future: manager.dataFuture,
+        future: manager.fetchRecipes(),
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -55,7 +51,7 @@ class _MyHomePageState extends State<HomePage> {
               }
               return DefaultTabController(
                 initialIndex: 0,
-                length: 3,
+                length: 2,
                 child: Scaffold(
                   appBar: AppBar(
                     leadingWidth: 100,
@@ -66,7 +62,6 @@ class _MyHomePageState extends State<HomePage> {
                       tabs: const [
                         Tab(icon: Icon(Icons.dinner_dining)),
                         Tab(icon: Icon(Icons.fitness_center)),
-                        Tab(icon: Icon(Icons.kitchen)),
                       ],
                       splashBorderRadius: BorderRadius.circular(25),
                       padding: EdgeInsets.symmetric(
@@ -104,9 +99,9 @@ class _MyHomePageState extends State<HomePage> {
                                 top: 12,
                                 bottom: 12,
                                 left:
-                                    MediaQuery.of(context).size.width * 1 / 10,
+                                MediaQuery.of(context).size.width * 1 / 10,
                                 right:
-                                    MediaQuery.of(context).size.width * 1 / 10),
+                                MediaQuery.of(context).size.width * 1 / 10),
                             child: TextField(
                               controller: controller,
                               onChanged: (value) {
@@ -135,54 +130,8 @@ class _MyHomePageState extends State<HomePage> {
                                           .primary),
                                 ),
                                 hintText: "Search for recipes...",
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 3),
-                                  child: ToggleButtons(
-                                    isSelected: [AIenabled],
-                                    onPressed: (index) {
-                                      setState(() {
-                                        AIenabled = !AIenabled;
-                                      });
-                                    },
-                                    selectedBorderColor: Colors.green[700],
-                                    selectedColor: Colors.white,
-                                    fillColor: Colors.green[200],
-                                    color: Colors.green[400],
-                                    borderRadius: BorderRadius.circular(7),
-                                    constraints: const BoxConstraints(
-                                      minHeight: 40.0,
-                                      minWidth: 80.0,
-                                    ),
-                                    children: const [
-                                      Text("AI"),
-                                    ],
-                                  ),
-                                ),
                               ),
                             ),
-                            /*trailing: [
-                                    ToggleButtons(
-                                      isSelected: [AIenabled],
-                                      onPressed: (index) {
-                                        setState(() {
-                                          AIenabled = !AIenabled;
-                                        });
-                                      },
-                                      selectedBorderColor: Colors.green[700],
-                                      selectedColor: Colors.white,
-                                      fillColor: Colors.green[200],
-                                      color: Colors.green[400],
-                                      borderRadius: BorderRadius.circular(25),
-                                      constraints: const BoxConstraints(
-                                        minHeight: 40.0,
-                                        minWidth: 80.0,
-                                      ),
-                                      children: const [
-                                        Text("AI"),
-                                      ],
-                                    ),
-                                  ]
-                              ),*/
                           ),
                           SingleChildScrollView(
                             child: Card(
@@ -198,15 +147,61 @@ class _MyHomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               clipBehavior: Clip.antiAlias,
-
+                              child: ExpansionTile(
+                                shape: Border(),
+                                title: Text("Filters"),
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            child: toggles(products: const [
+                                              "Avocado",
+                                              "Tomato",
+                                              "Milk",
+                                              "Potato",
+                                              "Butter",
+                                              "Flour",
+                                              "Egg",
+                                              "Carrot",
+                                              "Meat",
+                                              "Lemaon",
+                                              "Garlic",
+                                              "Nuts"
+                                            ], selectedProducts: selected),
+                                          ),
+                                          Container(
+                                              alignment: Alignment.center,
+                                              child: Padding(
+                                                padding:
+                                                EdgeInsets.only(top: 5, bottom: 10),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      filterHolodos(selected);
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                      "Apply Filters"),
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Expanded(
                             child: ValueListenableBuilder<int>(
-                                valueListenable:
-                                    RecipeManager.instance.favoritesValue,
-                                builder:
-                                    (BuildContext context, int value, child) {
+                                valueListenable: RecipeManager.instance.favoritesValue,
+                                builder: (BuildContext context, int value, child) {
                                   return ListView(
                                     children: [
                                       for (var recipeCard in recipeCards)
@@ -218,7 +213,6 @@ class _MyHomePageState extends State<HomePage> {
                         ],
                       ),
                       Column(
-
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 16),
@@ -287,175 +281,6 @@ class _MyHomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 12,
-                                bottom: 12,
-                                left:
-                                MediaQuery.of(context).size.width * 1 / 10,
-                                right:
-                                MediaQuery.of(context).size.width * 1 / 10),
-                            child: TextField(
-                              controller: controllerHolodilnik,
-                              onChanged: (value) {
-                                filterRecipesHolodilnik(value);
-                              },
-                              decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.search),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                fillColor: Theme.of(context)
-                                    .colorScheme
-                                    .secondaryContainer,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary),
-                                ),
-                                filled: true,
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                                ),
-                                hintText: "Search for recipes...",
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.only(right: 3),
-                                  child: ToggleButtons(
-                                    isSelected: [AIenabled],
-                                    onPressed: (index) {
-                                      setState(() {
-                                        AIenabled = !AIenabled;
-                                      });
-                                    },
-                                    selectedBorderColor: Colors.green[700],
-                                    selectedColor: Colors.white,
-                                    fillColor: Colors.green[200],
-                                    color: Colors.green[400],
-                                    borderRadius: BorderRadius.circular(7),
-                                    constraints: const BoxConstraints(
-                                      minHeight: 40.0,
-                                      minWidth: 80.0,
-                                    ),
-                                    children: const [
-                                      Text("AI"),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            /*trailing: [
-                                    ToggleButtons(
-                                      isSelected: [AIenabled],
-                                      onPressed: (index) {
-                                        setState(() {
-                                          AIenabled = !AIenabled;
-                                        });
-                                      },
-                                      selectedBorderColor: Colors.green[700],
-                                      selectedColor: Colors.white,
-                                      fillColor: Colors.green[200],
-                                      color: Colors.green[400],
-                                      borderRadius: BorderRadius.circular(25),
-                                      constraints: const BoxConstraints(
-                                        minHeight: 40.0,
-                                        minWidth: 80.0,
-                                      ),
-                                      children: const [
-                                        Text("AI"),
-                                      ],
-                                    ),
-                                  ]
-                              ),*/
-                          ),
-                          SingleChildScrollView(
-                            child: Card(
-                              elevation: 3,
-                              margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width *
-                                      1 /
-                                      10,
-                                  right: MediaQuery.of(context).size.width *
-                                      1 /
-                                      10),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              clipBehavior: Clip.antiAlias,
-                              child: ExpansionTile(
-                                shape: Border(),
-                                title: Text("Filters"),
-                                children: [
-                                  Container(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.center,
-                                            child: toggles(products: [
-                                              "Avocado",
-                                              "Tomato",
-                                              "Milk",
-                                              "Potato",
-                                              "Butter",
-                                              "Flour",
-                                              "Egg",
-                                              "Carrot",
-                                              "Meat",
-                                              "Lemaon",
-                                              "Garlic",
-                                              "Nuts"
-                                            ], selectedProducts: selected),
-                                          ),
-                                          Container(
-                                              alignment: Alignment.center,
-                                              child: Padding(
-                                                padding:
-                                                EdgeInsets.only(top: 10),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      filterHolodos(selected);
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                      "Apply Filters"),
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: ValueListenableBuilder<int>(
-                                valueListenable:
-                                RecipeManager.instance.favoritesValue,
-                                builder:
-                                    (BuildContext context, int value, child) {
-                                  return ListView(
-                                    children: [
-                                      for (var recipeCard in recipeCardsHolodilnik)
-                                        recipeCard,
-                                    ],
-                                  );
-                                }),
-                          ),
-                        ],
-                      ),
-
                     ],
                   ),
                 ),
@@ -474,20 +299,11 @@ class _MyHomePageState extends State<HomePage> {
     });
   }
 
-  void filterRecipesHolodilnik(String value) {
-    recipeCardsHolodilnik = RecipeManager.instance.allRecipeCards;
-    setState(() {
-      recipeCardsHolodilnik = recipeCardsHolodilnik.where((element) =>
-      element.recipe.name.toLowerCase().contains(value.toLowerCase()) || element.recipe.description.contains(value.toLowerCase()) || containsIngredient(element.recipe.ingredients, controllerHolodilnik) || element.recipe.steps.contains(value.toLowerCase())
-      ).toList();
-    });
-  }
-
   void filterHolodos(List<String> selectedProds){
-    recipeCardsHolodilnik = RecipeManager.instance.allRecipeCards;
+    recipeCards = RecipeManager.instance.allRecipeCards;
     setState(() {
       for (var prod in selectedProds){
-        recipeCardsHolodilnik = recipeCardsHolodilnik.where((element) => containsIngredientInSelected(element.recipe.ingredients, prod)).toList();
+        recipeCards = recipeCards.where((element) => containsIngredientInSelected(element.recipe.ingredients, prod)).toList();
       }
     });
   }
@@ -509,8 +325,6 @@ class _MyHomePageState extends State<HomePage> {
     }
     return false;
   }
-
-
 
   void setControllers(int cals, int fats, int carbs, int prot) {
     calController.text = cals.toString();

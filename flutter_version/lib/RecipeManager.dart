@@ -129,8 +129,6 @@ class RecipeManager with ChangeNotifier {
     false
   ];
   List<String> selectedAllergies = [];
-  List<String> notSelectedAllergies = [];
-
   List<String> allAllergyStrings = [
     "Soya",
     "Sulphur Dioxide",
@@ -150,7 +148,6 @@ class RecipeManager with ChangeNotifier {
 
   void bitFieldToBoolList(int bits) {
     selectedAllergies = [];
-    notSelectedAllergies = [];
     allAllergies = [
       false,
       false,
@@ -174,7 +171,6 @@ class RecipeManager with ChangeNotifier {
     String bitFieldString = bits.toString();
     final String binary = decimalToBinaryConverter(bitFieldString);
 
-
     for (int i = binary.runes.length - 1; int != 0; i--) {
       if (i >= 13) {
         break;
@@ -184,13 +180,13 @@ class RecipeManager with ChangeNotifier {
         selectedAllergies.add(allAllergyStrings[i]);
       } else {
         allAllergies[i] = false;
-        notSelectedAllergies.add(allAllergyStrings[i]);
       }
     }
   }
 
-  late ValueNotifier<int> favoritesValue = ValueNotifier(
-      favouriteRecipeCards.length);
+  List<String> excludedFoodList = [];
+
+  late ValueNotifier<int> favoritesValue = ValueNotifier(favouriteRecipeCards.length);
 
   RecipeManager._internal();
 
@@ -198,11 +194,10 @@ class RecipeManager with ChangeNotifier {
     allRecipes = [];
     allRecipeCards = [];
     var response = await http.get(
-        Uri.parse('http://75.119.136.109:3000/recipe'));
+        Uri.parse('http://144.126.143.118:3000/recipe'));
 
     if (response.statusCode == 200) {
-      final parsed = (jsonDecode(response.body) as List).cast<
-          Map<String, dynamic>>();
+      final parsed = (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
       for (int i = 0; i < parsed.length; i++) {
         allRecipes.add(Recipe.fromJson(parsed[i]));
       }
@@ -210,8 +205,46 @@ class RecipeManager with ChangeNotifier {
       for (Recipe r in allRecipes) {
         allRecipeCards.add(RecipeCard(recipe: r, isFavourite: false,));
       }
+      print(allRecipeCards);
     } else {
-      throw Exception('Failed to load recipes');
+      throw Exception('Failed to load recipes ${response.statusCode}');
+    }
+
+    for (int i = 0; i < ingredientTypesNotSelected.length; i++) {
+      var response = await http.get(Uri.parse('http://144.126.143.118:3000/ingredient/type/${ingredientTypesNotSelected[i]}'));
+      if (response.statusCode == 200) {
+        final parsed = (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
+        for (int i = 0; i < parsed.length; i++) {
+          excludedFoodList.add(parsed[i]["name"] as String);
+        }
+      } else {
+        throw Exception('Failed to load recipes ${response.statusCode}');
+      }
+    }
+  }
+
+  void filterRecipes() {
+    filteredRecipeCards = [];
+    for (int i = 0; i < allRecipeCards.length; i++) {
+      bool add = true;
+      for (int j = 0; j < ingredientTypesSelected.length; j++) {
+        if (!allRecipeCards[i].recipe.ingredients.contains(ingredientTypesSelected[j])) {
+          add = false;
+        }
+      }
+      for (int j = 0; j < ingredientTypesNotSelected.length; j++) {
+        if (allRecipeCards[i].recipe.ingredients.contains(ingredientTypesNotSelected[j])) {
+          add = false;
+        }
+      }
+      for (int j = 0; j < selectedAllergies.length; j++) {
+        if (allRecipeCards[i].recipe.allergyBits & (1 << j) != 0) {
+          add = false;
+        }
+      }
+      if (add) {
+        filteredRecipeCards.add(allRecipeCards[i]);
+      }
     }
   }
 }
