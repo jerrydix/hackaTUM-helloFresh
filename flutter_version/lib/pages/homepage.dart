@@ -34,13 +34,15 @@ class _MyHomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    manager.dataFuture = manager.fetchRecipes();
+    recipeCards = RecipeManager.instance.allRecipeCards;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-        future: manager.fetchRecipes(),
+        future: manager.dataFuture,
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<HomePage> {
                       splashBorderRadius: BorderRadius.circular(25),
                       padding: EdgeInsets.symmetric(
                           horizontal:
-                              MediaQuery.of(context).size.width * 1 / 10),
+                              MediaQuery.of(context).size.width * 2 / 10),
                       //dividerColor: Colors.transparent,
                     ),
                     leading: Padding(
@@ -102,13 +104,15 @@ class _MyHomePageState extends State<HomePage> {
                                 top: 12,
                                 bottom: 12,
                                 left:
-                                MediaQuery.of(context).size.width * 1 / 10,
+                                MediaQuery.of(context).size.width * 2 / 10,
                                 right:
-                                MediaQuery.of(context).size.width * 1 / 10),
+                                MediaQuery.of(context).size.width * 2 / 10),
                             child: TextField(
                               controller: controller,
                               onChanged: (value) {
-                                filterRecipes(value);
+                                setState(() {
+                                  filterRecipes(value);
+                                });
                               },
                               decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.search),
@@ -141,10 +145,10 @@ class _MyHomePageState extends State<HomePage> {
                               elevation: 3,
                               margin: EdgeInsets.only(
                                   left: MediaQuery.of(context).size.width *
-                                      1 /
+                                      2 /
                                       10,
                                   right: MediaQuery.of(context).size.width *
-                                      1 /
+                                      2 /
                                       10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -152,7 +156,7 @@ class _MyHomePageState extends State<HomePage> {
                               clipBehavior: Clip.antiAlias,
                               child: ExpansionTile(
                                 shape: Border(),
-                                title: Text("Filters"),
+                                title: Text("Filter ingredients"),
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
@@ -201,6 +205,7 @@ class _MyHomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          Padding(padding: EdgeInsets.only(top: 5)),
                           Expanded(
                             child: ValueListenableBuilder<int>(
                                 valueListenable: RecipeManager.instance.favoritesValue,
@@ -276,7 +281,6 @@ class _MyHomePageState extends State<HomePage> {
                                     decoded.add(byte);
                                   }
                                   String data = utf8.decode(decoded);
-
                                   print(data);
                                 }
                               }, icon: Icon(Icons.upload_file, size: 50,))

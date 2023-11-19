@@ -33,7 +33,7 @@ class _LandingPageState extends State<LandingPage> {
                   width: 200,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+                  padding:  EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1.5 / 10),
                   child: Text("Let's start by selecting your favorite ingredient categories:",
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
@@ -50,7 +50,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1.5 / 10),
                   child: Text("Select any dietary restrictions you may have:",
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
@@ -64,27 +64,29 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+                  padding:  EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1.5 / 10),
                   child: Text("Alright, now let's get cooking!",
                     style: Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all(const Size(200, 100)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
+                Padding(padding: EdgeInsets.only(bottom: 20),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(const Size(200, 100)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                      ),
+                      textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.headlineMedium
                       ),
                     ),
-                    textStyle: MaterialStateProperty.all(Theme.of(context).textTheme.headlineMedium
-                    ),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, "/home");
+                    },
+                    child: const Text("Save Preferences"),
                   ),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, "/home");
-                  },
-                  child: const Text("Save Preferences"),
                 ),
               ],
             ),

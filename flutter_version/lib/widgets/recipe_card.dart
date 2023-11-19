@@ -34,7 +34,7 @@ class _RecipeCardState extends State<RecipeCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(left: clampDouble(MediaQuery.of(context).size.width * 1/10, 0, 500), right: clampDouble(MediaQuery.of(context).size.width * 1/10, 0, 500), top: 8),
+      margin: EdgeInsets.only(left: clampDouble(MediaQuery.of(context).size.width * 2/10, 0, 500), right: clampDouble(MediaQuery.of(context).size.width * 2/10, 0, 500), top: 8),
       elevation: 3,
       child: OpenContainer(
         transitionType: ContainerTransitionType.fadeThrough,
@@ -135,7 +135,7 @@ class _RecipeCardState extends State<RecipeCard> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
+                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 4/10 - 16) / 2 - 8,
                           child: Text(
                             widget.recipe.description,
                             style: const TextStyle(
@@ -150,7 +150,7 @@ class _RecipeCardState extends State<RecipeCard> {
                           thickness: 2,
                         ),
                         SizedBox(
-                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 2/10 - 16) / 2 - 8,
+                          width: (MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 4/10 - 16) / 2 - 8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

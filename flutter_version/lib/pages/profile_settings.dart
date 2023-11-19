@@ -15,33 +15,58 @@ class _ProfileSettingsState extends State<ProfileSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Icon(Icons.person, size: 100),
-          Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            child:
-            Text("Jonas", style: Theme.of(context).textTheme.headlineMedium),),
-          Container(
-            width: MediaQuery.of(context).size.width * 5 / 10,
-            alignment: Alignment.center,
-            child: Wrap(
-              children: List<Widget>.generate(
-                ingredients.length,
-                    (int index) => toggleIngredient(title: ingredients[index], value: 1,),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile", style: Theme.of(context).textTheme.bodyMedium,),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+          child: Center(
+              child: Column(
+                children: [
+                  Icon(Icons.person, size: 100),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child:
+                    Text("Jonas", style: Theme.of(context).textTheme.headlineMedium),),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+                    child: Text("Set preferences",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 6.8 / 10,
+                    alignment: Alignment.center,
+                    child: Wrap(
+                      children: List<Widget>.generate(
+                        ingredients.length,
+                            (int index) => toggleIngredient(title: ingredients[index], value: 1,),
+                      ),
+                    ),
+                  ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+              child: Divider()),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: MediaQuery.of(context).size.width * 1 / 10),
+                    child: Text("Select dietary restrictions",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 6.8 / 10,
+                    alignment: Alignment.center,
+                    child: Wrap(
+                      children: createAllergyTiles(),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * 5 / 10,
-            alignment: Alignment.center,
-            child: Wrap(
-              children: createAllergyTiles(),
-            ),
-          ),
-        ],
-      )
+          )
+      ),
     );
   }
   List<Widget> createAllergyTiles() {
