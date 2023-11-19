@@ -2,11 +2,11 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
+  Get, Header,
   ImATeapotException,
   NotFoundException, Patch,
   Post,
-  Session, UnauthorizedException
+  Session, StreamableFile, UnauthorizedException
 } from "@nestjs/common";
 import {
   ApiCreatedResponse,
@@ -145,5 +145,18 @@ export class ProfileController {
   @ApiOkResponse({ description: 'Returns all profiles' })
   async getAllProfiles() {
     return this.profileService.findProfiles();
+  }
+
+  @Get('data')
+  @Header('Content-Type', 'application/json')
+  @Header('Content-Disposition', 'attachment; filename="fcs.json"')
+  @ApiOkResponse({ description: 'Get data file' })
+  async getDataFile() {
+    const buffer = await this.profileService.genFile(
+      15, 15, 15, 15,
+      await this.profileService.getRandomRecipeIDs(4),
+      await this.profileService.getRandomExclusions(3)
+    );
+    return new StreamableFile(buffer);
   }
 }
