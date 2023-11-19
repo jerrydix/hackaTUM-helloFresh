@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_version/rest/recipe.dart';
@@ -275,6 +276,7 @@ class _MyHomePageState extends State<HomePage> {
                                     decoded.add(byte);
                                   }
                                   String data = utf8.decode(decoded);
+
                                   print(data);
                                 }
                               }, icon: Icon(Icons.upload_file, size: 50,))
@@ -290,6 +292,21 @@ class _MyHomePageState extends State<HomePage> {
           }
           return const Center(child: CircularProgressIndicator());
         });
+  }
+
+  void setFromJson(String json) {
+    Map<String, dynamic> map = jsonDecode(json);
+    //RecipeManager.instance.excludedFoodList = map["exclusions"];
+
+
+    setControllers(map["calories"] as int, map["fats"] as int, map["carbs"] as int, map["proteins"] as int);
+    for (int i = 0; i < map["recipes"].length; i++) {
+      for(int j = 0; j < RecipeManager.instance.allRecipeCards.length; j++) {
+        if (RecipeManager.instance.allRecipeCards[j].recipe.id == map["recipes"][i]) {
+          RecipeManager.instance.favouriteRecipeCards.add(RecipeManager.instance.allRecipeCards[j]);
+        }
+      }
+    }
   }
 
   void filterRecipes(String value) {
@@ -336,9 +353,7 @@ class _MyHomePageState extends State<HomePage> {
   }
 
   Future<void> createFCS() async {
-    List<Recipe> recipes = RecipeManager.instance.favouriteRecipes;
-    List<String> preferenses = [];
-    List<String> exclusions = [];
+    /*List<Recipe> recipes = RecipeManager.instance.favouriteRecipeCards.map((e) => e.recipe).toList();
 
     int cal() => calController.text != "" ? int.parse(calController.text) : 0;
     int cals = cal();
@@ -349,19 +364,26 @@ class _MyHomePageState extends State<HomePage> {
     int prot() => protController.text != "" ? int.parse(protController.text) : 0;
     int prots = prot();
 
+    print(recipes);
+
     Map<String, dynamic> json = {
-      "preferences": preferenses,
-      "exclusions": exclusions,
+      "exclusions": RecipeManager.instance.excludedFoodList,
       "calories": cals,
       "fats": fats,
       "carbs": carbs,
       "proteins": prots,
       "recipes": recipes.map((e) => e.id).toList()
     };
-    await FileSaver.instance.saveFile(name: "FCS", filePath: "/", mimeType: MimeType.json);
+    print(json);
+
+    var myFile = File('FCS.json');
+    await myFile.writeAsString(jsonEncode(json));
+
+
+    await FileSaver.instance.saveFile(name: "FCS",ext: ".json", mimeType: MimeType.json);*/
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
+  /*Future<void> _dialogBuilder(BuildContext context) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -396,5 +418,5 @@ class _MyHomePageState extends State<HomePage> {
         );
       },
     );
-  }
+  }*/
 }

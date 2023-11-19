@@ -26,13 +26,8 @@ class RecipeManager with ChangeNotifier {
 
   List<String> allergies = [];
 
-  void addToTypesSublist(String type, bool selected) {
-    List<String> currentList;
-    if (selected) {
-      currentList = ingredientTypesSelected;
-    } else {
-      currentList = ingredientTypesNotSelected;
-    }
+  String convertToType(String type) {
+    List<String> currentList = [];
 
     switch(type) {
       case "Dairy and Eggs": currentList.add("DAIRY_AND_EGGS");
@@ -68,6 +63,7 @@ class RecipeManager with ChangeNotifier {
       case "Misc": currentList.add("MISC");
       break;
     }
+    return currentList[0];
 
   }
 
@@ -210,15 +206,20 @@ class RecipeManager with ChangeNotifier {
       throw Exception('Failed to load recipes ${response.statusCode}');
     }
 
+    List<String> convertedList= [];
     for (int i = 0; i < ingredientTypesNotSelected.length; i++) {
-      var response = await http.get(Uri.parse('http://144.126.143.118:3000/ingredient/type/${ingredientTypesNotSelected[i]}'));
+      convertedList.add(convertToType(ingredientTypesNotSelected[i]));
+    }
+
+    for (int i = 0; i < convertedList.length; i++) {
+      var response = await http.get(Uri.parse('http://144.126.143.118:3000/ingredient/type/${convertedList[i]}'));
       if (response.statusCode == 200) {
         final parsed = (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
         for (int i = 0; i < parsed.length; i++) {
           excludedFoodList.add(parsed[i]["name"] as String);
         }
       } else {
-        throw Exception('Failed to load recipes ${response.statusCode}');
+        throw Exception('Failed to load ingredients ${response.statusCode} ${convertedList[i]}');
       }
     }
   }
