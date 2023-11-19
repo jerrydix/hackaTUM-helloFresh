@@ -1,6 +1,5 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
 import { PrismaService } from "@/prisma.service";
-import { Buffer } from "buffer";
 
 @Injectable()
 export class ProfileService implements OnModuleInit {
@@ -84,6 +83,22 @@ export class ProfileService implements OnModuleInit {
         data: { preferences: { disconnect: { id: ingredient } } }
       });
     }
+    return null;
+  }
+
+  async getPreferences(id: any) {
+    let user = await this.findProfile(id);
+    if (user) {
+      let data = await this.prisma.profile.findFirst({
+        where: { id: id },
+        include: { preferences: true }
+      });
+      if (data) {
+        return data.preferences;
+      }
+      return [];
+    }
+    return null;
   }
 
   async addDislike(id: number, ingredient: number) {
@@ -109,6 +124,21 @@ export class ProfileService implements OnModuleInit {
         data: { exclusions: { disconnect: { id: ingredient } } }
       })
     }
+  }
+
+  async getDislikes(id: any) {
+    let user = await this.findProfile(id);
+    if (user) {
+      let data = await this.prisma.profile.findFirst({
+        where: { id: id },
+        include: { exclusions: true }
+      });
+      if (data) {
+        return data.exclusions;
+      }
+      return [];
+    }
+    return null;
   }
 
   async setAllergies(id: number, bits: number) {

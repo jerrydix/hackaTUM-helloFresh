@@ -32,18 +32,10 @@ export class RecipeService implements OnModuleInit {
     return cost;
   }
 
-  async getRecipes(user: PreferenceProfile) {
-    let exclusions = user.exclusions.map((ingredient) => ingredient.id);
-    /* Filter by Preferences */
-    let result = await this.prisma.recipe.findMany({
-      where: { ingredients: { none: { id: { in: exclusions } } } },
+  async getRecipes() {
+    return this.prisma.recipe.findMany({
       include: { ingredients: true, utensils: true }
     });
-    /* Filter by Allergies */
-    result = result.filter((recipe) => {
-      return (recipe.allergyBits & user.allergyBits) === 0;
-    });
-    return result;
   }
 
   async searchRecipes(user: PreferenceProfile, term: string) {

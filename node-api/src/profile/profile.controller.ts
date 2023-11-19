@@ -50,6 +50,13 @@ export class ProfileController {
     return result;
   }
 
+  @Get('preference')
+  @ApiOkResponse({ description: 'Returns all preferences' })
+  async getPreferences(@Session() session: Record<string, any>) {
+    if (!session.user_id) throw new UnauthorizedException();
+    return await this.profileService.getPreferences(session.user_id);
+  }
+
   @Post('dislike')
   @ApiCreatedResponse({ description: 'Added dislike' })
   @ApiNotFoundResponse({ description: 'No such ingredient' })
@@ -70,6 +77,13 @@ export class ProfileController {
     let result = await this.profileService.removeDislike(session.user_id, id);
     if (result === null) throw new NotFoundException();
     return result;
+  }
+
+  @Get('dislike')
+  @ApiOkResponse({ description: 'Returns all dislikes' })
+  async getDislikes(@Session() session: Record<string, any>) {
+    if (!session.user_id) throw new UnauthorizedException();
+    return await this.profileService.getDislikes(session.user_id);
   }
 
   @Post('allergy')
