@@ -1,17 +1,19 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get, Header,
   ImATeapotException,
   NotFoundException, Patch,
-  Post,
+  Post, Query,
   Session, StreamableFile, UnauthorizedException
 } from "@nestjs/common";
 import {
+  ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiNotFoundResponse,
-  ApiOkResponse,
+  ApiOkResponse, ApiQuery,
   ApiResponse,
   ApiTags,
   ApiUnauthorizedResponse
@@ -151,9 +153,27 @@ export class ProfileController {
   @Header('Content-Type', 'application/json')
   @Header('Content-Disposition', 'attachment; filename="fcs.json"')
   @ApiOkResponse({ description: 'Get data file' })
-  async getDataFile() {
+  @ApiBadRequestResponse({ description: 'Invalid query parameters' })
+  @ApiQuery({ name: 'calories', required: true })
+  @ApiQuery({ name: 'fats', required: true })
+  @ApiQuery({ name: 'carbs', required: true })
+  @ApiQuery({ name: 'proteins', required: true })
+  async getDataFile(
+    @Query('calories') calories: string,
+    @Query('fats') fats: string,
+    @Query('carbs') carbs: string,
+    @Query('proteins') proteins: string
+  ) {
+    const caloriesNum = parseInt(calories);
+    const fatsNum = parseInt(fats);
+    const carbsNum = parseInt(carbs);
+    const proteinsNum = parseInt(proteins);
+    if (isNaN(caloriesNum) || isNaN(fatsNum) || isNaN(carbsNum) || isNaN(proteinsNum)) {
+      throw new BadRequestException("Invalid query parameters.");
+    }
+
     const buffer = await this.profileService.genFile(
-      15, 15, 15, 15,
+      caloriesNum, fatsNum, carbsNum, proteinsNum,
       await this.profileService.getRandomRecipeIDs(4),
       await this.profileService.getRandomExclusions(3)
     );
