@@ -81,7 +81,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
             child: ValueListenableBuilder<int>(
               valueListenable: RecipeManager.instance.favoritesValue,
               builder: (BuildContext context, int value, child ) {
-                print("TATETSTS");
               return ListView(
                 children: [
                   for (var recipeCard in RecipeManager.instance.favouriteRecipeCards)
@@ -89,7 +88,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
                 ],
               );
             }
-
             ),
           ),
         ],
