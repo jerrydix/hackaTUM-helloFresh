@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_version/rest/recipe.dart';
@@ -281,6 +282,7 @@ class _MyHomePageState extends State<HomePage> {
                                     decoded.add(byte);
                                   }
                                   String data = utf8.decode(decoded);
+                                  setFromJson(data);
                                   print(data);
                                 }
                               }, icon: Icon(Icons.upload_file, size: 50,))
@@ -357,8 +359,6 @@ class _MyHomePageState extends State<HomePage> {
   }
 
   Future<void> createFCS() async {
-    /*List<Recipe> recipes = RecipeManager.instance.favouriteRecipeCards.map((e) => e.recipe).toList();
-
     int cal() => calController.text != "" ? int.parse(calController.text) : 0;
     int cals = cal();
     int fat() => fatController.text != "" ? int.parse(fatController.text) : 0;
@@ -368,23 +368,10 @@ class _MyHomePageState extends State<HomePage> {
     int prot() => protController.text != "" ? int.parse(protController.text) : 0;
     int prots = prot();
 
-    print(recipes);
-
-    Map<String, dynamic> json = {
-      "exclusions": RecipeManager.instance.excludedFoodList,
-      "calories": cals,
-      "fats": fats,
-      "carbs": carbs,
-      "proteins": prots,
-      "recipes": recipes.map((e) => e.id).toList()
-    };
-    print(json);
-
-    var myFile = File('FCS.json');
-    await myFile.writeAsString(jsonEncode(json));
-
-
-    await FileSaver.instance.saveFile(name: "FCS",ext: ".json", mimeType: MimeType.json);*/
+    final Uri url = Uri.parse('http://144.126.143.118:3000/profile/data?calories=${cals}&fats=${fats}&carbs=${carbs}&proteins=${prots}');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   /*Future<void> _dialogBuilder(BuildContext context) {
