@@ -35,7 +35,7 @@ export default [
     ingredients: {
       create: [
         {
-          ingredientType: 'chickpeas',
+          ingredientType: 'chickpea',
           quantity: 200,
           unit: 'gram',
           price: new Decimal(1.0),
@@ -690,5 +690,505 @@ export default [
       ]
     }
   },
-
+  {
+    title: "Quick Lentil Pan with Camembert",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_A_R04_W44_DE_L4855-1_Main_low-310f1478.jpg",
+    description: "A warm and satisfying lentil dish enriched with creamy Camembert, complemented by aromatic onions, garlic, and tomatoes.",
+    instructions: [
+      "Prepare Ingredients: Dice onions and tomatoes, mince garlic.",
+      "Cook Lentils: In a pan, cook lentils with onions and garlic until lentils are tender.",
+      "Add Camembert: Stir in slices of Camembert until melted and combined.",
+      "Serve: Garnish with thyme, salt, and pepper."
+    ].join('\n'),
+    duration: 25,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 420,
+    proteinsPerUnit: 18,
+    carbsPerUnit: 40,
+    fatsPerUnit: 20,
+    fiberPerUnit: 9,
+    vitamins: {
+      A: "10% of RDA",
+      C: "15% of RDA"
+    },
+    minerals: {
+      Calcium: "20% of RDA",
+      Iron: "25% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "lentil", quantity: 150, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "camembert", quantity: 100, unit: "gram", price: new Decimal(2.0) },
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "tomato", quantity: 100, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "thyme", quantity: 2, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "frying pan" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "colander" }
+      ]
+    }
+  },
+  {
+    title: "Fresh Sourdough Pinsa with Eggplant & Bell Pepper",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/frische-sauerteig-pinsa-mit-aubergine-9914a1de-b1f065d8.jpg",
+    description: "A delicious sourdough pinsa topped with roasted eggplant, bell pepper, and melted mozzarella, seasoned with oregano.",
+    instructions: [
+      "Prepare Toppings: Slice eggplant and bell pepper, and chop tomatoes.",
+      "Roast Vegetables: Drizzle eggplant and bell pepper with olive oil, season with salt and pepper, and roast until tender.",
+      "Assemble Pinsa: Place sourdough pinsa base on a baking tray, top with roasted vegetables, tomatoes, and slices of mozzarella.",
+      "Bake: Bake in the oven until the crust is crispy and the cheese is melted.",
+      "Serve: Garnish with oregano and serve hot."
+    ].join('\n'),
+    duration: 40,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 480,
+    proteinsPerUnit: 18,
+    carbsPerUnit: 65,
+    fatsPerUnit: 20,
+    fiberPerUnit: 5,
+    vitamins: {
+      A: "15% of RDA",
+      C: "30% of RDA"
+    },
+    minerals: {
+      Calcium: "20% of RDA",
+      Iron: "10% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "sourdough pinsa base", quantity: 1, unit: "piece", price: new Decimal(2.0) },
+        { ingredientType: "eggplant", quantity: 150, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "bell pepper", quantity: 100, unit: "gram", price: new Decimal(0.7) },
+        { ingredientType: "tomato", quantity: 50, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "mozzarella", quantity: 100, unit: "gram", price: new Decimal(1.2) },
+        { ingredientType: "oregano", quantity: 2, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "oven" },
+        { name: "baking tray" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+  {
+    title: "Indian Chickpea Coconut Soup",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/indische-kichererbsen-kokos-suppe-209cf4f0-22aa709f.jpg",
+    description: "A creamy and flavorful Indian-inspired soup with chickpeas, coconut milk, and a blend of aromatic spices.",
+    instructions: [
+      "Sauté Aromatics: In a pot, heat coconut oil and sauté onion, garlic, and ginger.",
+      "Add Spices: Stir in cumin, coriander, turmeric, and garam masala.",
+      "Cook Soup: Add chickpeas, carrots, tomatoes, coconut milk, and vegetable broth. Simmer until vegetables are tender.",
+      "Blend (Optional): For a smoother texture, blend part of the soup.",
+      "Season: Finish with lemon juice, salt, and pepper."
+    ].join('\n'),
+    duration: 35,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 360,
+    proteinsPerUnit: 10,
+    carbsPerUnit: 45,
+    fatsPerUnit: 18,
+    fiberPerUnit: 8,
+    vitamins: {
+      A: "30% of RDA",
+      C: "40% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "20% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "ginger", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "carrot", quantity: 100, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "tomato", quantity: 100, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "chickpea", quantity: 200, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "coconut milk", quantity: 200, unit: "ml", price: new Decimal(1.5) },
+        { ingredientType: "vegetable broth", quantity: 500, unit: "ml", price: new Decimal(1.0) },
+        { ingredientType: "cumin", quantity: 1, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "coriander", quantity: 1, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "turmeric", quantity: 1, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "garam masala", quantity: 1, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "coconut oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "lemon juice", quantity: 5, unit: "ml", price: new Decimal(0.05) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "large pot" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "blender" }
+      ]
+    }
+  },
+  {
+    title: "Hake in Teriyaki Sauce with Spicy Zucchini",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/seehecht-in-teriyakisauce-mit-scharfer-zucchetti-7b6f7a5b-3ea2ba19.jpg",
+    description: "Delicious hake fillets served with a rich teriyaki sauce and spicy zucchini, accompanied by fluffy rice.",
+    instructions: [
+      "Cook Rice: Boil rice according to package instructions.",
+      "Prepare Zucchini: Slice zucchini and sauté with chili flakes and a bit of oil.",
+      "Cook Hake: In a separate pan, cook hake fillets until golden and cooked through.",
+      "Make Teriyaki Sauce: In a small bowl, mix teriyaki sauce with soy sauce and vinegar.",
+      "Serve: Plate the hake and zucchini, drizzle with teriyaki sauce, and sprinkle with sesame seeds."
+    ].join('\n'),
+    duration: 30,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 500,
+    proteinsPerUnit: 35,
+    carbsPerUnit: 50,
+    fatsPerUnit: 15,
+    fiberPerUnit: 3,
+    vitamins: {
+      A: "5% of RDA",
+      C: "20% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "15% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "hake", quantity: 200, unit: "gram", price: new Decimal(4.0) },
+        { ingredientType: "zucchini", quantity: 150, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "rice", quantity: 100, unit: "gram", price: new Decimal(0.8) },
+        { ingredientType: "teriyaki sauce", quantity: 30, unit: "ml", price: new Decimal(0.7) },
+        { ingredientType: "soy sauce", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "vinegar", quantity: 5, unit: "ml", price: new Decimal(0.05) },
+        { ingredientType: "sesame oil", quantity: 5, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "vegetable oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "chili flakes", quantity: 1, unit: "gram", price: new Decimal(0.05) },
+        { ingredientType: "sesame seeds", quantity: 5, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "frying pan" },
+        { name: "saucepan" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "colander" },
+        { name: "small bowl" }
+      ]
+    }
+  },
+  {
+    title: "Thuringian Fried Potato Pan",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_A_R02_W12_DE_L4547-1_Main_low-a98312f6.jpg",
+    description: "A traditional Thuringian dish featuring crispy fried potatoes and savory sausage, garnished with fresh parsley.",
+    instructions: [
+      "Boil Potatoes: Cook potatoes until slightly tender, then slice them.",
+      "Cook Sausage: In a frying pan, cook the sausage until browned and set aside.",
+      "Fry Potatoes: In the same pan, fry the sliced potatoes until golden and crispy.",
+      "Combine: Add the sausage back to the pan with the potatoes.",
+      "Serve: Garnish with chopped parsley, salt, and pepper."
+    ].join('\n'),
+    duration: 12,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 600,
+    proteinsPerUnit: 25,
+    carbsPerUnit: 45,
+    fatsPerUnit: 35,
+    fiberPerUnit: 5,
+    vitamins: {
+      A: "0% of RDA",
+      C: "10% of RDA"
+    },
+    minerals: {
+      Calcium: "5% of RDA",
+      Iron: "15% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "potato", quantity: 500, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "sausage", quantity: 200, unit: "gram", price: new Decimal(3.0) },
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "parsley", quantity: 10, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "vegetable oil", quantity: 20, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "frying pan" },
+        { name: "pot" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "colander" }
+      ]
+    }
+  },
+  {
+    title: "Ham & Cheese Burrito",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_R13_W47_DE_L4852-1_Main_f1_high-4889c478.jpg",
+    description: "A classic burrito filled with savory ham, melted cheese, and a mix of bell pepper and onion, served with salsa and sour cream.",
+    instructions: [
+      "Prepare Fillings: Dice ham, bell pepper, and onion.",
+      "Cook Fillings: Sauté bell pepper and onion in a pan, then add ham and cook until heated through.",
+      "Assemble Burritos: Lay out flour tortillas, fill with the ham mixture, and top with cheese. Roll up tightly.",
+      "Serve: Serve the burritos with salsa and sour cream on the side."
+    ].join('\n'),
+    duration: 20,
+    difficulty: Difficulty.EASY,
+    caloriesPerUnit: 550,
+    proteinsPerUnit: 25,
+    carbsPerUnit: 45,
+    fatsPerUnit: 30,
+    fiberPerUnit: 3,
+    vitamins: {
+      A: "10% of RDA",
+      C: "20% of RDA"
+    },
+    minerals: {
+      Calcium: "15% of RDA",
+      Iron: "10% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "ham", quantity: 150, unit: "gram", price: new Decimal(2.0) },
+        { ingredientType: "cheese", quantity: 100, unit: "gram", price: new Decimal(1.5) },
+        { ingredientType: "bell pepper", quantity: 50, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "onion", quantity: 50, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "flour tortilla", quantity: 2, unit: "piece", price: new Decimal(1.0) },
+        { ingredientType: "salsa", quantity: 30, unit: "ml", price: new Decimal(0.5) },
+        { ingredientType: "sour cream", quantity: 30, unit: "ml", price: new Decimal(0.5) },
+        { ingredientType: "vegetable oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "frying pan" },
+        { name: "knife" },
+        { name: "cutting board" }
+      ]
+    }
+  },
+  {
+    title: "Fresh Linguine with Shrimp",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF200422_R15_W26_DE_EXP2704-1_MB_Main_low-4bccafb5.jpg",
+    description: "A delightful pasta dish featuring fresh linguine, succulent shrimp, cherry tomatoes, and a squeeze of lemon, garnished with Parmesan and parsley.",
+    instructions: [
+      "Cook Linguine: Boil linguine in salted water until al dente, then drain.",
+      "Prepare Shrimp: In a pan, cook shrimp with garlic and cherry tomatoes in olive oil.",
+      "Combine: Toss the cooked linguine with the shrimp mixture. Add lemon juice and zest.",
+      "Serve: Garnish with grated Parmesan cheese and chopped parsley."
+    ].join('\n'),
+    duration: 30,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 550,
+    proteinsPerUnit: 25,
+    carbsPerUnit: 70,
+    fatsPerUnit: 20,
+    fiberPerUnit: 4,
+    vitamins: {
+      A: "15% of RDA",
+      C: "25% of RDA"
+    },
+    minerals: {
+      Calcium: "10% of RDA",
+      Iron: "18% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "shrimp", quantity: 200, unit: "gram", price: new Decimal(3.0) },
+        { ingredientType: "linguine", quantity: 200, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "cherry tomato", quantity: 100, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "lemon", quantity: 1, unit: "piece", price: new Decimal(0.5) },
+        { ingredientType: "parmesan cheese", quantity: 30, unit: "gram", price: new Decimal(1.2) },
+        { ingredientType: "parsley", quantity: 5, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "olive oil", quantity: 20, unit: "ml", price: new Decimal(0.2) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "pot" },
+        { name: "frying pan" },
+        { name: "colander" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "cheese grater" },
+        { name: "small bowl" }
+      ]
+    }
+  },
+  {
+    title: "Honey Salmon Fillet on Ginger-Miso Sweet Potato Puree",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF220622_R31_W33_DE_PM3731-6_MB_Main_low-f320e5ba.jpg",
+    description: "A succulent salmon fillet glazed with honey, served over a smooth and flavorful ginger-miso sweet potato puree.",
+    instructions: [
+      "Prepare Sweet Potato Puree: Boil sweet potatoes until tender. Blend with butter, miso paste, and ginger to form a smooth puree.",
+      "Cook Salmon: Place salmon fillets on a baking tray, glaze with honey and olive oil, and bake until cooked through.",
+      "Serve: Plate the salmon over the sweet potato puree. Drizzle with extra honey if desired."
+    ].join('\n'),
+    duration: 40,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 650,
+    proteinsPerUnit: 35,
+    carbsPerUnit: 55,
+    fatsPerUnit: 30,
+    fiberPerUnit: 6,
+    vitamins: {
+      A: "25% of RDA",
+      C: "30% of RDA"
+    },
+    minerals: {
+      Calcium: "8% of RDA",
+      Iron: "15% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "salmon fillet", quantity: 200, unit: "gram", price: new Decimal(5.0) },
+        { ingredientType: "sweet potato", quantity: 300, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "ginger", quantity: 10, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "miso paste", quantity: 20, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "butter", quantity: 20, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "honey", quantity: 30, unit: "ml", price: new Decimal(0.4) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "oven" },
+        { name: "baking tray" },
+        { name: "pot" },
+        { name: "food processor" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "small bowl" }
+      ]
+    }
+  },
+  {
+    title: "Fine Rump Steak with Cowboy Butter Sauce",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF220721_R20_W37_DE_VP4181-1_MB_Main_low-0e9d124a.jpg",
+    description: "A perfectly cooked rump steak served with a rich and flavorful cowboy butter sauce, infused with garlic, parsley, and a hint of lemon.",
+    instructions: [
+      "Prepare Cowboy Butter Sauce: Mix softened butter with minced garlic, chopped parsley, lemon zest, chili flakes, salt, and pepper.",
+      "Cook Steak: Season the steak and cook in a frying pan to your desired doneness.",
+      "Serve: Top the steak with the cowboy butter sauce and let it melt over the warm steak."
+    ].join('\n'),
+    duration: 30,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 700,
+    proteinsPerUnit: 40,
+    carbsPerUnit: 2,
+    fatsPerUnit: 60,
+    fiberPerUnit: 1,
+    vitamins: {
+      A: "10% of RDA",
+      C: "15% of RDA"
+    },
+    minerals: {
+      Calcium: "2% of RDA",
+      Iron: "25% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "rump steak", quantity: 200, unit: "gram", price: new Decimal(5.0) },
+        { ingredientType: "butter", quantity: 50, unit: "gram", price: new Decimal(0.5) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "parsley", quantity: 10, unit: "gram", price: new Decimal(0.2) },
+        { ingredientType: "lemon", quantity: 1, unit: "piece", price: new Decimal(0.5) },
+        { ingredientType: "chili flakes", quantity: 1, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "olive oil", quantity: 10, unit: "ml", price: new Decimal(0.1) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "frying pan" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "cheese grater" }
+      ]
+    }
+  },
+  {
+    title: "Chicken Saltimbocca with Eggplant au Gratin",
+    imgUrl: "https://img.hellofresh.com/c_fill,f_auto,fl_lossy,h_531,q_auto,w_944/hellofresh_s3/image/HF_Y23_R41_W38_DE_PM4717-1_Main__2low-79833e45.jpg",
+    description: "Tender chicken breast wrapped in prosciutto and sage, served alongside a rich and cheesy eggplant au gratin.",
+    instructions: [
+      "Prepare Eggplant au Gratin: Slice eggplant, layer in a baking dish with garlic and cheese, and bake until golden.",
+      "Make Chicken Saltimbocca: Wrap chicken breasts with prosciutto and sage, secure with toothpicks, and pan-fry until cooked.",
+      "Serve: Plate the chicken saltimbocca with the eggplant au gratin on the side."
+    ].join('\n'),
+    duration: 45,
+    difficulty: Difficulty.MEDIUM,
+    caloriesPerUnit: 650,
+    proteinsPerUnit: 40,
+    carbsPerUnit: 20,
+    fatsPerUnit: 35,
+    fiberPerUnit: 5,
+    vitamins: {
+      A: "10% of RDA",
+      C: "15% of RDA"
+    },
+    minerals: {
+      Calcium: "20% of RDA",
+      Iron: "12% of RDA"
+    },
+    allergyBits: 0,
+    ingredients: {
+      create: [
+        { ingredientType: "chicken breast", quantity: 200, unit: "gram", price: new Decimal(3.0) },
+        { ingredientType: "prosciutto", quantity: 50, unit: "gram", price: new Decimal(2.0) },
+        { ingredientType: "eggplant", quantity: 200, unit: "gram", price: new Decimal(1.0) },
+        { ingredientType: "cheese", quantity: 100, unit: "gram", price: new Decimal(1.5) },
+        { ingredientType: "garlic", quantity: 5, unit: "gram", price: new Decimal(0.1) },
+        { ingredientType: "sage", quantity: 5, unit: "gram", price: new Decimal(0.3) },
+        { ingredientType: "olive oil", quantity: 20, unit: "ml", price: new Decimal(0.2) },
+        { ingredientType: "salt", quantity: 1, unit: "gram", price: new Decimal(0.01) },
+        { ingredientType: "pepper", quantity: 1, unit: "gram", price: new Decimal(0.02) }
+      ]
+    },
+    utensils: {
+      connect: [
+        { name: "oven" },
+        { name: "baking tray" },
+        { name: "frying pan" },
+        { name: "knife" },
+        { name: "cutting board" },
+        { name: "toothpicks" }
+      ]
+    }
+  }
 ];
