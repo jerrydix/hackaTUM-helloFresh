@@ -535,8 +535,6 @@ class _MyHomePageState extends State<HomePage> {
     await FileSaver.instance.saveFile(name: "FCS", filePath: "/", mimeType: MimeType.json);
   }
 
-
-
   Future<void> _dialogBuilder(BuildContext context) {
     return showDialog<void>(
       context: context,
