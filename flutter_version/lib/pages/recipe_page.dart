@@ -141,7 +141,59 @@ class _RecipePageState extends State<RecipePage> {
   }
 
   List<tag> genTagList(){
-    return List<tag>.generate(10, (int index) => tag(content: 'high protein', color: Colors.green));
+    bool vegan = true;
+    Widget vegWidget;
+    Widget veganWidget;
+    bool less10 = false;
+    Widget Widget10;
+    Widget Widget30;
+    bool less30 = false;
+    bool ff = true;
+    Widget ffwidget;
+    bool kids = true;
+    Widget kidsWidget;
+    bool veget = true;
+    bool less650 = false;
+    Widget Widget650;
+    bool hightProt = false;
+    Widget WidgetProt;
+
+    List<tag> tags = [];
+
+    List<String> veganList = ["butter", "egg", "greek yogurt", "heavy cream", "cheese"];
+    for (var ingredient in widget.recipe.ingredients){
+      if (ingredient.type == "chicken breast" || ingredient.type == "bacon" || ingredient.type == "sausage"|| ingredient.type == "ham" || ingredient.type == "prosciutto" || ingredient.type == "rump steak"){
+        veget = false;
+      }
+      if(veganList.contains(ingredient.type)){
+        vegan = false;
+      }
+      if(ingredient.type == "sweet chili sauce" || ingredient.type == "chili flakes"){
+        kids = false;
+      }
+    }
+    if(kids){
+      tags.add(tag(content: 'kids', color: Colors.red));
+    }
+    if(vegan){
+      tags.add(tag(content: 'vegan', color: Colors.green));
+    }
+    if(veget){
+      tags.add(tag(content: 'vegeterian', color: Colors.green));
+    }
+    if(widget.recipe.calories < 650){
+      tags.add(tag(content: 'less 650', color: Colors.grey));
+    }
+    if(widget.recipe.proteins > 30){
+      tags.add(tag(content: 'high protein', color: Colors.yellow));
+    }
+    if(widget.recipe.time == 10){
+      tags.add(tag(content: '10 min', color: Colors.blue));
+    }
+    if(widget.recipe.time < 30){
+      tags.add(tag(content: 'less 30', color: Colors.orange));
+    }
+    return tags;
   }
 }
 
