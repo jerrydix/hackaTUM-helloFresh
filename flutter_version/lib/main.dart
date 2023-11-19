@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'RecipeApp',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, brightness: Brightness.light, colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(109, 162, 83, 255)), fontFamily: GoogleFonts.montserrat(fontWeight: FontWeight.w500).fontFamily),
       navigatorKey: MyApp.navigatorKey,
       home: const IntroPage(), //check if persisted login, then go to home page, if not go to register / login page

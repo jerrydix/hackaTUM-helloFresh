@@ -96,7 +96,7 @@ class _RecipePageState extends State<RecipePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
 
                             children: [
-                              Text("Nutritions", style: Theme.of(context).textTheme.headlineMedium),
+                              Text("Nutrition", style: Theme.of(context).textTheme.headlineMedium),
 
                               ConstrainedBox(
                                 constraints: const BoxConstraints(
