@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_version/RecipeManager.dart';
 import 'package:flutter_version/widgets/toggle_ingredientType.dart';
 
-import '../rest/Recipe.dart';
-import '../widgets/recipe_card.dart';
-import '../widgets/toggle_product.dart';
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
   @override
