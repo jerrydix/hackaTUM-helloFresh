@@ -75,7 +75,9 @@ class _MyHomePageState extends State<HomePage> {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.person),
-                            onPressed: () {}, // TODO: implement
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/profile');
+                            }, // TODO: implement
                           ),
                         ],
                       ),
