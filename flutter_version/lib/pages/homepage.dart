@@ -346,6 +346,16 @@ class _MyHomePageState extends State<HomePage> {
     int carbs = carb();
     int prot() => protController.text != "" ? int.parse(protController.text) : 0;
     int prots = prot();
+
+    Map<String, dynamic> json = {
+      "preferences": preferenses,
+      "exclusions": exclusions,
+      "calories": cals,
+      "fats": fats,
+      "carbs": carbs,
+      "proteins": prots,
+      "recipes": recipes.map((e) => e.id).toList()
+    };
     await FileSaver.instance.saveFile(name: "FCS", filePath: "/", mimeType: MimeType.json);
   }
 
